@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.cody.coupletones.HomePage">
+
+    <item android:id="@+id/search"
+        android:title="Search"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/add_location"
+        android:icon="@drawable/ic_add_white_24dp"
+        android:title="Add Location"
+        android:orderInCategory="2"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/profile"
+        android:orderInCategory="3"
+        android:icon="@drawable/ic_perm_identity_white_24dp"
+        android:gravity="left"
+        android:title="Profile"
+        app:showAsAction="always"/>
+
+    <!--<item android:id="@+id/search"
+        android:title="search"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:actionViewClass="android.widget.SearchView" />-->
+</menu>
