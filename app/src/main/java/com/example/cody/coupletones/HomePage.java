@@ -101,9 +101,22 @@ public class HomePage extends AppCompatActivity {
     private void enterPhoneNo()
     {
         final EditText input = (EditText) findViewById(R.id.phoneNum);
-        if(input.toString() != ""){
-            phoneNo = input.toString();
-            LocationChecker.receiptNo = input.toString();
+        if(input.toString() == "Enter Partner's Phone No."){
+
+            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
+            TextView title = (TextView) findViewById(R.id.title);
+            TextView button = (TextView) findViewById(R.id.button);
+            if(title != null) title.setTypeface(font);
+            if(button != null) button.setTypeface(font);
+
+            Button login = (Button) findViewById(R.id.button);
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                }
+            });
         }
 
 /*

@@ -22,21 +22,8 @@ public class MainActivity extends AppCompatActivity {
         if(HomePage.phoneNo == "")
         {
             setContentView(R.layout.activity_main);
-            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
-            TextView title = (TextView) findViewById(R.id.title);
-            TextView button = (TextView) findViewById(R.id.button);
-            if(title != null) title.setTypeface(font);
-            if(button != null) button.setTypeface(font);
-
-            Button login = (Button) findViewById(R.id.button);
-            login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(MainActivity.this, HomePage.class);
-                    startActivity(i);
-                }
-            });
+            Intent i = new Intent(MainActivity.this, HomePage.class);
+            startActivity(i);
         }
         else
         {

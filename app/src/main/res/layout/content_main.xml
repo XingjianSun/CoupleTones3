@@ -60,10 +60,9 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
         android:id="@+id/phoneNum"
+        android:text="Enter Partner&apos;s Phone No."
         android:layout_above="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:text="Enter Partner&apos;s Phone No." />
+        android:layout_alignStart="@+id/button" />
+
 </RelativeLayout>
