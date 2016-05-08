@@ -56,7 +56,7 @@ public class LocationChecker extends AppCompatActivity{
         Log.v("Success", "Successfully added Location");
     }
 
-    public static boolean checkForVisit(Location location){
+    public boolean checkForVisit(Location location){
         Iterator it = myFavLocs.entrySet().iterator();
         if(myFavLocs.isEmpty()) {
             return false;
@@ -77,21 +77,6 @@ public class LocationChecker extends AppCompatActivity{
         return myFavLocs;
     }
 
-    protected void sendSMSMessage() {
-        Log.i("Send SMS", "");
-        String phoneNo = txtphoneNo;//.getText().toString();
-        String message = txtMessage;//.getText().toString();
 
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, message, null, null);
-            Toast.makeText(getApplicationContext(), "SMS sent.", Toast.LENGTH_LONG).show();
-        }
-
-        catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "SMS faild, please try again.", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-    }
 
 }

@@ -116,7 +116,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //      location.getLongitude())).title("location"));
                 Log.v("Location Changed", "Location has changed");
                 currLocation = location;
-                LocationChecker.checkForVisit(location);
+                boolean check = locationChecker.checkForVisit(location);
+                if(check) sendSMSMessage("18583978438", "Hello World!");
             }
 
             @Override
@@ -196,6 +197,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    void sendSMSMessage(String phoneNo, String message) {
+        Log.i("Send SMS", "In sendSMSMessage()");
+
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, message, null, null);
+            Toast.makeText(getApplicationContext(), "SMS sent.", Toast.LENGTH_LONG).show();
+        }
+
+        catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "SMS faild, please try again.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
 
     //onclick addLocation
     @Override

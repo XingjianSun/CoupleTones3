@@ -7,8 +7,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.AlertDialog;
@@ -31,11 +33,9 @@ public class Profile extends AppCompatActivity {
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
         TextView name = (TextView) findViewById(R.id.name);
-        Button add_partner = (Button) findViewById(R.id.add_partner);
         Button view_favorites = (Button) findViewById(R.id.view_favorites);
         Button log_out = (Button) findViewById(R.id.log_out_button);
         if(name != null) name.setTypeface(font);
-        if(add_partner != null) add_partner.setTypeface(font);
         if(view_favorites != null) view_favorites.setTypeface(font);
         if(log_out != null) log_out.setTypeface(font);
 
@@ -43,14 +43,6 @@ public class Profile extends AppCompatActivity {
 
         TextView textViewToChange = (TextView) findViewById(R.id.name);
         textViewToChange.setText(cody.getName());
-
-        Button login = (Button) findViewById(R.id.add_partner);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Add Partner", Toast.LENGTH_LONG).show();
-            }
-        });
 
         Button favorites = (Button) findViewById(R.id.view_favorites);
         favorites.setOnClickListener(new View.OnClickListener() {

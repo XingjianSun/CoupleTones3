@@ -1,5 +1,7 @@
 package com.example.cody.coupletones;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,6 +9,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -30,6 +34,7 @@ import com.google.android.gms.iid.InstanceID;
 
 public class HomePage extends AppCompatActivity {
 
+    String phoneNo = "";
     GoogleCloudMessaging gcm;
     String regid = "";
     String PROJECT_NUMBER = "886426104734";
@@ -53,6 +58,8 @@ public class HomePage extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, test );
 
         getRegId();
+
+        enterPhoneNo();
 
         lv.setAdapter(arrayAdapter);
     }
@@ -92,10 +99,6 @@ public class HomePage extends AppCompatActivity {
             return true;
         }
 
-        if(id == R.id.search){
-            //Toast.makeText(getBaseContext(), "Search", Toast.LENGTH_LONG).show();
-            getRegId();
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -137,8 +140,37 @@ public class HomePage extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String msg) {
-                Toast.makeText(getBaseContext(), "Working", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), "Working", Toast.LENGTH_LONG).show();
             }
         }.execute(null, null, null);
     }
+
+    private void enterPhoneNo()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter Partner's Phone Number");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_PHONE);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                phoneNo = input.getText().toString();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        if(phoneNo == "") builder.show();
+    }
+
 }
