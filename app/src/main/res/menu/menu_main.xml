@@ -1,7 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.cody.coupletones.HomePage">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <item android:id="@+id/search"
         android:title="Search"
@@ -23,9 +22,4 @@
         android:title="Profile"
         app:showAsAction="always"/>
 
-    <!--<item android:id="@+id/search"
-        android:title="search"
-        android:orderInCategory="2"
-        android:showAsAction="always"
-        android:actionViewClass="android.widget.SearchView" />-->
 </menu>

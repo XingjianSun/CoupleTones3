@@ -30,8 +30,14 @@ public class Profile extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
-        TextView button = (TextView) findViewById(R.id.name);
-        if(button != null) button.setTypeface(font);
+        TextView name = (TextView) findViewById(R.id.name);
+        Button add_partner = (Button) findViewById(R.id.add_partner);
+        Button view_favorites = (Button) findViewById(R.id.view_favorites);
+        Button log_out = (Button) findViewById(R.id.log_out_button);
+        if(name != null) name.setTypeface(font);
+        if(add_partner != null) add_partner.setTypeface(font);
+        if(view_favorites != null) view_favorites.setTypeface(font);
+        if(log_out != null) log_out.setTypeface(font);
 
         Person cody = new Person("Cody");
 
