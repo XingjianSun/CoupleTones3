@@ -47,7 +47,7 @@ import java.util.Map;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener
-        , View.OnClickListener {
+        , View.OnClickListener, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
 
     private GoogleMap mMap;
     //private GoogleApiClient client;
@@ -55,11 +55,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationListener locationListener;
     private Location currLocation;
     private LocationChecker locationChecker;
-    private HashMap myFavLocs;
-    public Marker marker;
+    private LatLng tapped;
     public Button addFavLocation;
     public EditText nameLocation;
-    public float check = (float) 160.934;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +81,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if(button != null) button.setTypeface(font);
         if(editText != null) editText.setTypeface(font);
 
-        myFavLocs = new HashMap();
+        tapped = new LatLng(0,0);
+
+        locationChecker = new LocationChecker();
     }
 
 
@@ -101,8 +101,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.setOnMapClickListener(this);
+        mMap.setOnMapLongClickListener(this);
 
-        locationChecker = new LocationChecker(mMap);
         // Add a marker in Moscow and move the camera
         //LatLng Moscow = new LatLng(55,37);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("My location"));
@@ -158,7 +159,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             return;
         }
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationManager.requestLocationUpdates("gps", 0, 0, locationListener);
     }
 
@@ -226,11 +226,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            currLocation = locationManager.getLastKnownLocation("gps");
+            Location toAdd = new Location("");
+            toAdd.setLatitude(tapped.latitude);
+            toAdd.setLongitude(tapped.longitude);
             Log.v("Button Pressed!", "The Button has been pressed!");
             String name = nameLocation.getText().toString();
             Log.v("Name", name);
-            locationChecker.addLocation(name, currLocation);
+            if(locationChecker.addLocation(name, toAdd)){
+                mMap.addMarker(new MarkerOptions().position(new LatLng(toAdd.getLatitude(),
+                        toAdd.getLongitude())).title(name));
+            }
         }
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        tapped = latLng;
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        tapped = latLng;
     }
 }

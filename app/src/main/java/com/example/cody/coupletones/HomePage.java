@@ -34,11 +34,7 @@ import com.google.android.gms.iid.InstanceID;
 
 public class HomePage extends AppCompatActivity {
 
-    String phoneNo = "";
-    GoogleCloudMessaging gcm;
-    String regid = "";
-    String PROJECT_NUMBER = "886426104734";
-
+    static String phoneNo = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +46,12 @@ public class HomePage extends AppCompatActivity {
         ListView lv = (ListView) findViewById(R.id.visits);
 
         ArrayList<String> test = new ArrayList<String>();
-        test.add("Cody");
-        test.add("Casey");
-        test.add("Kim");
-        test.add("Anthony");
+        //still to fix
+        test.add("Location");
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, test );
 
-        getRegId();
+//        getRegId();
 
         enterPhoneNo();
 
@@ -103,50 +97,17 @@ public class HomePage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void getRegId() {
-        new AsyncTask<Void, Void, String>() {
-
-            @Override
-            protected String doInBackground(Void... params) {
-                String msg = "";
-
-                try {
-                    if(gcm == null) {
-                        gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-                    }
-
-                    regid = gcm.register(PROJECT_NUMBER);
-                    if(regid == null) {
-                        Log.i("GCM", "LogID is null");
-                    }
-                    msg = "Device registered, registration ID=" + regid;
-                    Log.i("GCM", "!!!!! " + regid);
-
-                    /*regid = InstanceID.getInstance(HomePage.this).getId();
-                    String authorizedEntity = PROJECT_NUMBER; // Project id from Google Developer Console
-                    String scope = "GCM"; // e.g. communicating using GCM, but you can use any
-                    // URL-safe characters up to a maximum of 1000, or
-                    // you can also leave it blank.
-                    String token = InstanceID.getInstance(HomePage.this).getToken(authorizedEntity,scope);
-                    msg = "Device registered, registration ID=" + regid;
-                    Log.i("GCM", "!!!!! " + regid);*/
-
-                } catch(IOException ex) {
-                    msg = "Error: " + ex.getMessage();
-                    //Log.i("GCM", msg);
-                }
-                return msg;
-            }
-
-            @Override
-            protected void onPostExecute(String msg) {
-                //Toast.makeText(getBaseContext(), "Working", Toast.LENGTH_LONG).show();
-            }
-        }.execute(null, null, null);
-    }
 
     private void enterPhoneNo()
     {
+        final EditText input = (EditText) findViewById(R.id.phoneNum);
+        if(input.toString() != ""){
+            phoneNo = input.toString();
+            LocationChecker.receiptNo = input.toString();
+        }
+
+/*
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter Partner's Phone Number");
 
@@ -161,6 +122,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 phoneNo = input.getText().toString();
+                LocationChecker.receiptNo = phoneNo;
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -170,7 +132,7 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        if(phoneNo == "") builder.show();
+        if(phoneNo == "") builder.show();*/
     }
 
 }

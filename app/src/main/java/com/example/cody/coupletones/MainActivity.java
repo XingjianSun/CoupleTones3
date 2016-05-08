@@ -19,23 +19,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        if(HomePage.phoneNo == "")
+        {
+            setContentView(R.layout.activity_main);
+            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
+            TextView title = (TextView) findViewById(R.id.title);
+            TextView button = (TextView) findViewById(R.id.button);
+            if(title != null) title.setTypeface(font);
+            if(button != null) button.setTypeface(font);
 
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
-        TextView title = (TextView) findViewById(R.id.title);
-        TextView button = (TextView) findViewById(R.id.button);
-        if(title != null) title.setTypeface(font);
-        if(button != null) button.setTypeface(font);
+            Button login = (Button) findViewById(R.id.button);
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(MainActivity.this, HomePage.class);
+                    startActivity(i);
+                }
+            });
+        }
+        else
+        {
+            setContentView(R.layout.activity_home_page);
+        }
 
-        Button login = (Button) findViewById(R.id.button);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(MainActivity.this, HomePage.class);
-                startActivity(i);
-            }
-        });
+
     }
 
     @Override
@@ -63,6 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void loginClick(View v)
     {
-        Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
     }
 }

@@ -27,33 +27,32 @@ public class LocationChecker extends AppCompatActivity{
 
     String txtphoneNo = "18583978438";
     String txtMessage = "Test This";
+    SmsManager smsManager = SmsManager.getDefault();
 
     private static HashMap myFavLocs;
     public static float check = (float) 160.934;
-    private GoogleMap mMap;
+    public static String receiptNo = (String) "";
+    //private GoogleMap mMap;
 
-    public LocationChecker(GoogleMap mMap) {
-        this.mMap = mMap;
+    public LocationChecker() {
+        //this.mMap = mMap;
         myFavLocs = new HashMap();
     }
 
-    public void addLocation(String name, Location currLocation) {
+    public boolean addLocation(String name, Location currLocation) {
 
         if(name.equals("") || name.equals(null) || myFavLocs.containsKey(name)) {
             Log.w("error", "No names specified");
-            return;
+            return false;
         }
         if(currLocation == null) {
             Log.w("Location is Null", "Null Location");
-            return;
+            return false;
 
         }
         myFavLocs.put(name, currLocation);
-        if (mMap!=null) {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(currLocation.getLatitude(),
-                    currLocation.getLongitude())).title(name));
-        }
         Log.v("Success", "Successfully added Location");
+        return true;
     }
 
     public boolean checkForVisit(Location location){
@@ -67,6 +66,8 @@ public class LocationChecker extends AppCompatActivity{
             float dist = location.distanceTo(toComp);
             if(dist <= check){
                 Log.v("Visit", "A Visit has occurred!!");
+
+                smsManager.sendTextMessage(receiptNo, null, "Your partner has visited" + pair.getKey(), null, null);
                 return true;
             }
         }
