@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,11 +65,6 @@ public class HomePage extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }

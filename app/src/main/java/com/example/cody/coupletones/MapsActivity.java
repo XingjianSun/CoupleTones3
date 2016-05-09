@@ -12,12 +12,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -32,10 +30,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         , View.OnClickListener, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
 
     private GoogleMap mMap;
-    //private GoogleApiClient client;
     private LocationManager locationManager;
     private LocationListener locationListener;
-    private Location currLocation;
     private LocationChecker locationChecker;
     private LatLng tapped;
     public Button addFavLocation;
@@ -90,7 +86,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onLocationChanged(Location location) {
                 Log.v("Location Changed", "Location has changed");
-                currLocation = location;
                 boolean check = locationChecker.checkForVisit(location);
             }
 
@@ -172,7 +167,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onClick(View v) {
         if (v == addFavLocation) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding

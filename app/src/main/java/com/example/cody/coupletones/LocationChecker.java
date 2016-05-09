@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class LocationChecker extends AppCompatActivity{
 
-
     SmsManager smsManager = SmsManager.getDefault();
 
     private static HashMap myFavLocs;

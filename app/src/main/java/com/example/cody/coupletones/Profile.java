@@ -17,13 +17,12 @@ public class Profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // if single
         setContentView(R.layout.activity_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Set fonts for objects in the activity page
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
         TextView name = (TextView) findViewById(R.id.name);
         Button view_favorites = (Button) findViewById(R.id.view_favorites);
@@ -32,20 +31,13 @@ public class Profile extends AppCompatActivity {
         if(view_favorites != null) view_favorites.setTypeface(font);
         if(log_out != null) log_out.setTypeface(font);
 
-        Button favorites = (Button) findViewById(R.id.view_favorites);
-        favorites.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "View Favorites", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        onButtonClickListener();
+        viewFavsListener();
+        logOutListener();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void onButtonClickListener() {
+    public void logOutListener() {
         Button button_sbm = (Button)findViewById(R.id.log_out_button);
         button_sbm.setOnClickListener(
                 new View.OnClickListener() {
@@ -75,4 +67,14 @@ public class Profile extends AppCompatActivity {
         );
     }
 
+    public void viewFavsListener()
+    {
+        Button favorites = (Button) findViewById(R.id.view_favorites);
+        favorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getBaseContext(), "View Favorites", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }
