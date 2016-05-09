@@ -50,11 +50,6 @@ public class HomePage extends AppCompatActivity {
         test.add("Location");
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, test );
-
-//        getRegId();
-
-
-
         lv.setAdapter(arrayAdapter);
     }
 

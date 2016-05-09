@@ -39,11 +39,6 @@ public class Profile extends AppCompatActivity {
         if(view_favorites != null) view_favorites.setTypeface(font);
         if(log_out != null) log_out.setTypeface(font);
 
-        Person cody = new Person("Cody");
-
-        TextView textViewToChange = (TextView) findViewById(R.id.name);
-        textViewToChange.setText(cody.getName());
-
         Button favorites = (Button) findViewById(R.id.view_favorites);
         favorites.setOnClickListener(new View.OnClickListener() {
             @Override
