@@ -80,5 +80,11 @@ public class JUnit_test extends ActivityInstrumentationTestCase2<MapsActivity> {
         boolean test = locationChecker.checkForVisit(test_location, true);
         assertEquals(false, test);
     }
+    public void test_invalid_phoneNo(){
+        MainActivity main = new MainActivity();
+        String number = "123456";
+        boolean test = main.checkPhoneNumber(number);
+        assertEquals(false, test);
+    }
 
 }
