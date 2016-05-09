@@ -24,8 +24,7 @@ public class HomePage extends AppCompatActivity {
         ListView lv = (ListView) findViewById(R.id.visits);
 
         ArrayList<String> test = new ArrayList<String>();
-        //still to fix
-        test.add("Location");
+
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, test );
         lv.setAdapter(arrayAdapter);

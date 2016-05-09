@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPreferences = getSharedPreferences("partner_info", MODE_PRIVATE);
-        if(sharedPreferences.getString("Partner's phone number", "").length() == 10){
+        if(sharedPreferences.getString("Partner's phone number", "").length() == 10 ||
+                sharedPreferences.getString("Partner's phone number", "").length() == 4){
             Intent i = new Intent(MainActivity.this, HomePage.class);
             startActivity(i);
         }
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(phoneNo.length() == 10 && PhoneNumberUtils.isGlobalPhoneNumber(phoneNo)){
+                    if((phoneNo.length() == 10 || phoneNo.length() == 4) && PhoneNumberUtils.isGlobalPhoneNumber(phoneNo)){
 
                         Intent i = new Intent(MainActivity.this, HomePage.class);
                         startActivity(i);

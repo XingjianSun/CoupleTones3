@@ -46,17 +46,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="200dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:hint="Phone Number"
-        android:ellipsize="start"
-        android:gravity="center_horizontal"
-        android:id="@+id/email"
-        android:layout_above="@+id/button"
-        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="120dp"

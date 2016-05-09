@@ -86,7 +86,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onLocationChanged(Location location) {
                 Log.v("Location Changed", "Location has changed");
-                boolean check = locationChecker.checkForVisit(location);
+                boolean check = locationChecker.checkForVisit(location, false);
             }
 
             @Override

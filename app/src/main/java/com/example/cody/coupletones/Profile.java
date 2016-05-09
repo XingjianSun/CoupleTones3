@@ -3,6 +3,7 @@ package com.example.cody.coupletones;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,10 @@ public class Profile extends AppCompatActivity {
                                 .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        SharedPreferences preferences = getSharedPreferences("partner_info", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putString("Partner's phone number", "");
+                                        editor.apply();
                                         Intent i = new Intent(Profile.this, MainActivity.class);
                                         startActivity(i);
                                     }

@@ -41,7 +41,7 @@ public class LocationChecker extends AppCompatActivity{
         return true;
     }
 
-    public boolean checkForVisit(Location location){
+    public boolean checkForVisit(Location location, boolean test){
         Iterator it = myFavLocs.entrySet().iterator();
         if(myFavLocs.isEmpty()) {
             return false;
@@ -52,8 +52,9 @@ public class LocationChecker extends AppCompatActivity{
             float dist = location.distanceTo(toComp);
             if(dist <= check){
                 Log.v("Visit", "A Visit has occurred!!");
-
-                smsManager.sendTextMessage(receiptNo, null, "Your partner has visited" + pair.getKey(), null, null);
+                if(!test){
+                    smsManager.sendTextMessage(receiptNo, null, "Your partner has visited " + pair.getKey(), null, null);
+                }
                 return true;
             }
         }
