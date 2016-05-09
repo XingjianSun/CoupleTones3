@@ -17,6 +17,7 @@ import android.widget.Toast;
 import android.widget.Button;
 import android.content.Intent;
 
+//main Acitivty
 public class MainActivity extends AppCompatActivity {
     static String phoneNo = "";
 
