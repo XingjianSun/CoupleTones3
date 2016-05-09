@@ -2,7 +2,9 @@ package com.example.cody.coupletones;
 
 /**
  * Created by Cody on 5/7/16.
- */
+a class that takes care adding location and checking valid visit
+
+*/
 
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;

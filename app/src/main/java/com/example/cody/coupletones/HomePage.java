@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+//homepage UI+ login
 public class HomePage extends AppCompatActivity {
 
     @Override
