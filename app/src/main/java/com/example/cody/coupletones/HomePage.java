@@ -1,36 +1,15 @@
 package com.example.cody.coupletones;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.graphics.Typeface;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.telephony.SmsManager;
-import android.text.InputType;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MenuItem;
-import android.view.View;
-import android.content.Intent;
 import android.view.Menu;
-import android.view.inputmethod.EditorInfo;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
+import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
 

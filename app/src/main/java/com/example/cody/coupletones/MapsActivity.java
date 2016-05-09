@@ -1,49 +1,31 @@
 package com.example.cody.coupletones;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.net.Uri;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
-import android.provider.ContactsContract;
-import android.provider.Settings;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.Criteria;
-import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.cody.coupletones.LocationChecker;
-
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener
@@ -67,7 +49,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         addFavLocation = (Button) findViewById(R.id.markFavLoc);
@@ -104,21 +85,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setOnMapClickListener(this);
         mMap.setOnMapLongClickListener(this);
 
-        // Add a marker in Moscow and move the camera
-        //LatLng Moscow = new LatLng(55,37);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("My location"));
-
         //location changed
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                //mMap.clear();
-                //marker = mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(),
-                //      location.getLongitude())).title("location"));
                 Log.v("Location Changed", "Location has changed");
                 currLocation = location;
                 boolean check = locationChecker.checkForVisit(location);
-                if(check) sendSMSMessage("18583978438", "Hello World!");
             }
 
             @Override
@@ -132,9 +105,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             @Override
-            public void onProviderDisabled(String provider) {
-                // Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                //startActivity(intent);
+            public void onProviderDisabled(String provider) {;
             }
         };
         //param1: provider = GPS
@@ -195,21 +166,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onProviderDisabled(String provider) {
 
-    }
-
-    void sendSMSMessage(String phoneNo, String message) {
-        Log.i("Send SMS", "In sendSMSMessage()");
-
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, message, null, null);
-            Toast.makeText(getApplicationContext(), "SMS sent.", Toast.LENGTH_LONG).show();
-        }
-
-        catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "SMS faild, please try again.", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
     }
 
     //onclick addLocation
