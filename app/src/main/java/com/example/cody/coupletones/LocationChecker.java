@@ -25,8 +25,7 @@ import java.util.Map;
 
 public class LocationChecker extends AppCompatActivity{
 
-    String txtphoneNo = "18583978438";
-    String txtMessage = "Test This";
+
     SmsManager smsManager = SmsManager.getDefault();
 
     private static HashMap myFavLocs;

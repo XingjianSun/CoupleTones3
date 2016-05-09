@@ -34,7 +34,7 @@ import com.google.android.gms.iid.InstanceID;
 
 public class HomePage extends AppCompatActivity {
 
-    static String phoneNo = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +53,7 @@ public class HomePage extends AppCompatActivity {
 
 //        getRegId();
 
-        enterPhoneNo();
+
 
         lv.setAdapter(arrayAdapter);
     }
@@ -98,54 +98,5 @@ public class HomePage extends AppCompatActivity {
     }
 
 
-    private void enterPhoneNo()
-    {
-        final EditText input = (EditText) findViewById(R.id.phoneNum);
-        if(input.toString() == "Enter Partner's Phone No."){
-
-            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
-            TextView title = (TextView) findViewById(R.id.title);
-            TextView button = (TextView) findViewById(R.id.button);
-            if(title != null) title.setTypeface(font);
-            if(button != null) button.setTypeface(font);
-
-            Button login = (Button) findViewById(R.id.button);
-            login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-
-                }
-            });
-        }
-
-/*
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter Partner's Phone Number");
-
-        // Set up the input
-        final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_PHONE);
-        builder.setView(input);
-
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                phoneNo = input.getText().toString();
-                LocationChecker.receiptNo = phoneNo;
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        if(phoneNo == "") builder.show();*/
-    }
 
 }

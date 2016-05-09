@@ -25,7 +25,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:stateListAnimator="@null"
-        android:layout_marginBottom="118dp"
+        android:layout_marginBottom="45dp"
         android:layout_above="@+id/button"
         android:layout_alignParentStart="true" />
 
@@ -41,9 +41,9 @@
         android:minWidth="200dp"
         android:nestedScrollingEnabled="false"
         android:onClick="loginClick"
-        android:layout_marginBottom="115dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="209dp" />
 
     <ImageView
         android:layout_width="120dp"
@@ -54,15 +54,5 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_above="@+id/title"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/imageView3" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/phoneNum"
-        android:text="Enter Partner&apos;s Phone No."
-        android:layout_above="@+id/button"
-        android:layout_alignStart="@+id/button" />
-
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
