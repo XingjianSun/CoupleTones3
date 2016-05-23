@@ -19,14 +19,15 @@ import android.content.Intent;
 
 //main Acitivty
 public class MainActivity extends AppCompatActivity {
-    static String phoneNo = "";
+    static String phoneNo = ""; //email address - reg and login
+    //name - reg
+    //password - reg and login
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPreferences = getSharedPreferences("partner_info", MODE_PRIVATE);
-        if(sharedPreferences.getString("Partner's phone number", "").length() == 10 ||
-                sharedPreferences.getString("Partner's phone number", "").length() == 4){
+        if(sharedPreferences.getString("Partner's phone number", "").length() > 0){
             Intent i = new Intent(MainActivity.this, HomePage.class);
             startActivity(i);
         }
