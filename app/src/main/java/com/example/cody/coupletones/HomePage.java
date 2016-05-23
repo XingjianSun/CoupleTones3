@@ -6,8 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,15 +24,23 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if(toolbar!= null) setSupportActionBar(toolbar);
-        if(toolbar != null) getSupportActionBar().setTitle("CoupleTones");
+        if(toolbar != null) getSupportActionBar().setTitle("Partner's Visited");
 
         ListView lv = (ListView) findViewById(R.id.visits);
-
         ArrayList<String> test = new ArrayList<String>();
 
+        test.add("Geisel Library");
+        test.add("Price Center");
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, test );
         lv.setAdapter(arrayAdapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

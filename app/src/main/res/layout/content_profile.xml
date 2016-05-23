@@ -54,16 +54,31 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Settings"
+        android:background="#ccb65d5d"
+        android:shadowColor="#ffffff"
+        android:layout_marginTop="8dp"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:minWidth="200dp"
+        android:id="@+id/settings"
+        android:layout_below="@+id/view_favorites"
+        android:layout_centerHorizontal="true" />
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Log Out"
         android:id="@+id/log_out_button"
         android:background="#ccb65d5d"
         android:shadowColor="#ffffff"
+        android:layout_marginTop="8dp"
         android:singleLine="true"
         android:textColor="#ffffff"
         android:minWidth="200dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/view_favorites"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/settings"
+        android:layout_alignStart="@+id/view_favorites" />
+
 
 
 

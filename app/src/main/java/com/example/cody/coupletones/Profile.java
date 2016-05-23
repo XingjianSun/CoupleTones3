@@ -28,12 +28,15 @@ public class Profile extends AppCompatActivity {
         TextView name = (TextView) findViewById(R.id.name);
         Button view_favorites = (Button) findViewById(R.id.view_favorites);
         Button log_out = (Button) findViewById(R.id.log_out_button);
+        Button settings = (Button) findViewById(R.id.settings);
         if(name != null) name.setTypeface(font);
         if(view_favorites != null) view_favorites.setTypeface(font);
         if(log_out != null) log_out.setTypeface(font);
+        if(settings != null) settings.setTypeface(font);
 
         viewFavsListener();
         logOutListener();
+        settingsListener();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -78,7 +81,20 @@ public class Profile extends AppCompatActivity {
         favorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "View Favorites", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(Profile.this, Favorites.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    public void settingsListener()
+    {
+        Button settings = (Button) findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Profile.this, Settings.class);
+                startActivity(i);
             }
         });
     }

@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/add_location"
-        android:icon="@drawable/ic_add_white_24dp"
+        android:icon="@drawable/ic_place_white_24dp"
         android:title="Add Location"
         android:orderInCategory="2"
         app:showAsAction="always"/>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.cody.coupletones.Favorites"
+    tools:showIn="@layout/activity_favorites"
+    android:weightSum="2">
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
+        <Button android:layout_width="0dp"
+            android:id="@+id/user_favorites"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#9d4747"
+            android:shadowColor="#ffffff"
+            android:background="#ffffff"
+            android:text="You"/>
+
+        <Button android:layout_width="0dp"
+            android:id="@+id/partner_favorites"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#9d4747"
+            android:shadowColor="#ffffff"
+            android:background="#ffffff"
+            android:text="Partner"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:textColor="#9d4747"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/nameLoc"
         android:gravity="center"
-        android:text="Name of Location"
+        android:hint="Name of Location"
         android:layout_above="@+id/markFavLoc"
         android:layout_alignEnd="@+id/markFavLoc"
         android:layout_alignStart="@+id/markFavLoc" />
