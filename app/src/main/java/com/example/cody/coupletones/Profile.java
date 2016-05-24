@@ -34,6 +34,8 @@ public class Profile extends AppCompatActivity {
         if(log_out != null) log_out.setTypeface(font);
         if(settings != null) settings.setTypeface(font);
 
+        name.setText("Name");
+
         viewFavsListener();
         logOutListener();
         settingsListener();

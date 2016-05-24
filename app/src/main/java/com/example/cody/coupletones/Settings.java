@@ -1,5 +1,6 @@
 package com.example.cody.coupletones;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -43,8 +44,13 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                     if (toneSwitch.isChecked() == true) {
-                    toneSwitch.setText("On ");
-                } else toneSwitch.setText("Off ");
+                        toneSwitch.setText("On ");
+                        toneSwitch.setTextColor(Color.parseColor("#9d4747"));
+                    }
+                    else {
+                        toneSwitch.setText("Off ");
+                        toneSwitch.setTextColor(Color.parseColor("#b2b2b2"));
+                    }
             }
         });
     }
@@ -55,11 +61,14 @@ public class Settings extends AppCompatActivity {
         toneSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(toneSwitch.isChecked() == true)
-                {
+                if (toneSwitch.isChecked() == true) {
                     toneSwitch.setText("On ");
+                    toneSwitch.setTextColor(Color.parseColor("#9d4747"));
                 }
-                else toneSwitch.setText("Off ");
+                else {
+                    toneSwitch.setText("Off ");
+                    toneSwitch.setTextColor(Color.parseColor("#b2b2b2"));
+                }
             }
         });
     }
