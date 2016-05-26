@@ -121,5 +121,6 @@ public class Profile extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("Partner's phone number", "");
         editor.apply();
+        MainActivity.firebase.setValue("Logged out");
     }
 }

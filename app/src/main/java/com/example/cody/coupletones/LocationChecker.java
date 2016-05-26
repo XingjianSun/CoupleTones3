@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
@@ -53,6 +54,7 @@ public class LocationChecker extends AppCompatActivity{
             if(dist <= check){
                 Log.v("Visit", "A Visit has occurred!!");
                 if(!test){
+                    MainActivity.firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
                     MainActivity.firebase.setValue("Your partner has visited "+pair.getKey());
                 }
                 return true;

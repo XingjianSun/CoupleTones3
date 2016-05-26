@@ -28,10 +28,11 @@ import com.firebase.client.ValueEventListener;
 
 //main Acitivty
 public class MainActivity extends AppCompatActivity {
-    static String name = "";
-    static String email = "";
-    static String phoneNo = "";
-    Button b1;
+    static String uname = "";
+    static String uemail = "";
+    static String upassword = "";
+    Button login;
+    Button register;
     static Firebase firebase;
     TextView textView;
 
@@ -93,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         textView = (TextView)findViewById(R.id.email);
-        b1 = (Button)findViewById(R.id.button);
+        login = (Button)findViewById(R.id.button);
+        register = (Button)findViewById(R.id.register);
         firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
         firebase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -105,16 +107,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(FirebaseError firebaseError) {}
         });
-        b1.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override //k
             public void onClick(View view) {
-                firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
-                EditText editText = (EditText)findViewById(R.id.email);
-                String edit = editText.getText().toString();
-                firebase.setValue("Logged in");
-
                 Intent i = new Intent(MainActivity.this, HomePage.class);
                 startActivity(i);
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                enterPhoneNo();
             }
         });
     }
@@ -159,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         name.setTypeface(font);
         name.setTextColor(Color.parseColor("#9d4747"));
         layout.addView(name);
+        uname = name.toString();
 
         final EditText email = new EditText(this);
         email.setHint("Email");
@@ -166,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
         email.setTypeface(font);
         email.setTextColor(Color.parseColor("#9d4747"));
         layout.addView(email);
+        uemail = email.toString();
 
         final EditText password = new EditText(this);
         password.setHint("Password");
@@ -174,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         password.setTypeface(font);
         password.setTextColor(Color.parseColor("#9d4747"));
         layout.addView(password);
+        upassword = password.toString();
 
         final EditText verify = new EditText(this);
         verify.setHint("Verify Password");
@@ -185,13 +191,10 @@ public class MainActivity extends AppCompatActivity {
 
         builder.setView(layout);
 
-        // Set up the buttons
         builder.setPositiveButton("Register", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                phoneNo = name.getText().toString();
-                //LocationChecker.receiptNo = phoneNo;
-
+                //TODO
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -200,8 +203,8 @@ public class MainActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-
-        if(phoneNo.length() < 10) builder.show();
+        builder.show();
+        //TODO - if password != veriypassword, then show and send toast that they don't match
     }
 
 }
