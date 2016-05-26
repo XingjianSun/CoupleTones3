@@ -18,16 +18,8 @@ public class Favorites extends AppCompatActivity {
         setContentView(R.layout.activity_favorites);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
-        Button userFavorites = (Button) findViewById(R.id.user_favorites);
-        Button partnerFavorites = (Button) findViewById(R.id.partner_favorites);
-
-        if(userFavorites != null) userFavorites.setTypeface(font);
-        if(partnerFavorites != null) partnerFavorites.setTypeface(font);
-
+        initializeComponents();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         userFavoritesListener();
         partnerFavoritesListener();
     }
@@ -49,9 +41,17 @@ public class Favorites extends AppCompatActivity {
         partnerFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Test Partner Favorites", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getBaseContext(), "Test Partner Favorites", Toast.LENGTH_LONG).show();
             }
         });
+    }
+    private void initializeComponents(){
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
+        Button userFavorites = (Button) findViewById(R.id.user_favorites);
+        Button partnerFavorites = (Button) findViewById(R.id.partner_favorites);
+
+        if(userFavorites != null) userFavorites.setTypeface(font);
+        if(partnerFavorites != null) partnerFavorites.setTypeface(font);
     }
 
 }

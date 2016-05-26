@@ -38,7 +38,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="New Text"
+        android:text="No Name"
         android:gravity="center"
         android:id="@+id/name"
         android:textSize="30sp"

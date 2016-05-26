@@ -11,8 +11,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+
+/*
+   * File containing user profile information.
+   * -Name
+   * -List of favorites
+   * -Vibration/Sound notification toggling
+   * -Option to logout
+   *
+ */
 public class Profile extends AppCompatActivity {
 
     @Override
@@ -23,18 +31,7 @@ public class Profile extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Set fonts for objects in the activity page
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
-        TextView name = (TextView) findViewById(R.id.name);
-        Button view_favorites = (Button) findViewById(R.id.view_favorites);
-        Button log_out = (Button) findViewById(R.id.log_out_button);
-        Button settings = (Button) findViewById(R.id.settings);
-        if(name != null) name.setTypeface(font);
-        if(view_favorites != null) view_favorites.setTypeface(font);
-        if(log_out != null) log_out.setTypeface(font);
-        if(settings != null) settings.setTypeface(font);
-
-        name.setText("Name");
+        initializeComponents();
 
         viewFavsListener();
         logOutListener();
@@ -55,10 +52,7 @@ public class Profile extends AppCompatActivity {
                                 .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        SharedPreferences preferences = getSharedPreferences("partner_info", MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = preferences.edit();
-                                        editor.putString("Partner's phone number", "");
-                                        editor.apply();
+                                        resetProfile();
                                         Intent i = new Intent(Profile.this, MainActivity.class);
                                         startActivity(i);
                                     }
@@ -95,9 +89,37 @@ public class Profile extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Profile.this, Settings.class);
+                Intent i = new Intent(Profile.this, notificationSettings.class);
                 startActivity(i);
             }
         });
+    }
+
+    private void initializeComponents()
+    {
+        // Set fonts for objects in the activity page
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
+        TextView name = (TextView) findViewById(R.id.name);
+
+        Button view_favorites = (Button) findViewById(R.id.view_favorites);
+        Button log_out = (Button) findViewById(R.id.log_out_button);
+        Button settings = (Button) findViewById(R.id.settings);
+
+        //Null checks
+        if(name != null) name.setTypeface(font);
+        if(view_favorites != null) view_favorites.setTypeface(font);
+        if(log_out != null) log_out.setTypeface(font);
+        if(settings != null) settings.setTypeface(font);
+
+        //yet to change----------------------------------------------------------------------
+        //name.setText("Name");
+    }
+    //--------------------------------------------------------------------------------
+    private void resetProfile()
+    {
+        SharedPreferences preferences = getSharedPreferences("partner_info", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("Partner's phone number", "");
+        editor.apply();
     }
 }

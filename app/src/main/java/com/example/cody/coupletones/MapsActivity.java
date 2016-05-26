@@ -24,10 +24,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-//main Activity
+
+/*
+    * Map activity which initialize map and add new favorite locations
+    * when button is pressed.
+ */
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener
-        , View.OnClickListener, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener,
+        View.OnClickListener, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
@@ -45,22 +49,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        addFavLocation = (Button) findViewById(R.id.markFavLoc);
-        addFavLocation.setOnClickListener(this);
-
-        nameLocation = (EditText) findViewById(R.id.nameLoc);
-
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
-        Button button = (Button) findViewById(R.id.markFavLoc);
-        EditText editText = (EditText) findViewById(R.id.nameLoc);
-        if(button != null) button.setTypeface(font);
-        if(editText != null) editText.setTypeface(font);
-
-        tapped = new LatLng(0,0);
-
-        locationChecker = new LocationChecker();
+        initializeComponents();
     }
 
 
@@ -81,32 +70,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setOnMapClickListener(this);
         mMap.setOnMapLongClickListener(this);
 
-        //location changed
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 Log.v("Location Changed", "Location has changed");
                 boolean check = locationChecker.checkForVisit(location, false);
             }
-
             @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
             @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
+            public void onProviderEnabled(String provider) {}
             @Override
-            public void onProviderDisabled(String provider) {;
-            }
+            public void onProviderDisabled(String provider) {}
         };
-        //param1: provider = GPS
-        //param2: minTime = 120000 milliseconds between location refresh
-        //param3: minDistnace = meters of change required to update location (161 meters = 1/10 of mile in meters
-        //param4:
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -121,47 +97,30 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET}, 10);
             } else {
-                int x = 0;
+                //do nothing
             }
             return;
         }
+        //param1: provider = GPS
+        //param2: minTime = 120000 milliseconds between location refresh
+        //param3: minDistnace = meters of change required to update location (161 meters = 1/10 of mile in meters
         locationManager.requestLocationUpdates("gps", 0, 0, locationListener);
     }
 
     @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-    }
-
+    public void onConnected(@Nullable Bundle bundle) {}
     @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
+    public void onConnectionSuspended(int i) {}
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
     @Override
-    public void onLocationChanged(Location location) {
-
-    }
-
+    public void onLocationChanged(Location location) {}
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
+    public void onStatusChanged(String provider, int status, Bundle extras) {}
     @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
+    public void onProviderEnabled(String provider) {}
     @Override
-    public void onProviderDisabled(String provider) {
-
-    }
+    public void onProviderDisabled(String provider) {}
 
     //onclick addLocation
     @Override
@@ -182,9 +141,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Location toAdd = new Location("");
             toAdd.setLatitude(tapped.latitude);
             toAdd.setLongitude(tapped.longitude);
-            Log.v("Button Pressed!", "The Button has been pressed!");
             String name = nameLocation.getText().toString();
-            Log.v("Name", name);
+            Log.v("Name of new location is", name);
             if(locationChecker.addLocation(name, toAdd)){
                 mMap.addMarker(new MarkerOptions().position(new LatLng(toAdd.getLatitude(),
                         toAdd.getLongitude())).title(name));
@@ -200,5 +158,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapLongClick(LatLng latLng) {
         tapped = latLng;
+    }
+
+    private void initializeComponents(){
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        addFavLocation = (Button) findViewById(R.id.markFavLoc);
+        addFavLocation.setOnClickListener(this);
+
+        nameLocation = (EditText) findViewById(R.id.nameLoc);
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
+        Button button = (Button) findViewById(R.id.markFavLoc);
+        EditText editText = (EditText) findViewById(R.id.nameLoc);
+        if(button != null) button.setTypeface(font);
+        if(editText != null) editText.setTypeface(font);
+
+        tapped = new LatLng(0,0);
+
+        locationChecker = new LocationChecker();
     }
 }

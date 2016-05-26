@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberUtils;
 import android.text.InputType;
@@ -20,17 +21,26 @@ import android.widget.Toast;
 import android.widget.Button;
 import android.content.Intent;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 //main Acitivty
 public class MainActivity extends AppCompatActivity {
     static String name = "";
     static String email = "";
     static String phoneNo = "";
+    Button b1;
+    static Firebase firebase;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPreferences = getSharedPreferences("partner_info", MODE_PRIVATE);
-        if(sharedPreferences.getString("Partner's phone number", "").length() == 10 ||
+        setContentView(R.layout.activity_main);
+        /*if(sharedPreferences.getString("Partner's phone number", "").length() == 10 ||
                 sharedPreferences.getString("Partner's phone number", "").length() == 4){
             Intent i = new Intent(MainActivity.this, HomePage.class);
             startActivity(i);
@@ -76,7 +86,37 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Test Register Button", Toast.LENGTH_LONG).show();
                 }
             });
-        }
+        }*/
+
+
+    }
+    protected void onStart(){
+        super.onStart();
+        textView = (TextView)findViewById(R.id.email);
+        b1 = (Button)findViewById(R.id.button);
+        firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
+        firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String data = dataSnapshot.getValue(String.class);
+                Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {}
+        });
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override //k
+            public void onClick(View view) {
+                firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
+                EditText editText = (EditText)findViewById(R.id.email);
+                String edit = editText.getText().toString();
+                firebase.setValue("Logged in");
+
+                Intent i = new Intent(MainActivity.this, HomePage.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -98,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -24,23 +24,8 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if(toolbar!= null) setSupportActionBar(toolbar);
-        if(toolbar != null) getSupportActionBar().setTitle("Partner's Visited");
-
-        ListView lv = (ListView) findViewById(R.id.visits);
-        ArrayList<String> test = new ArrayList<String>();
-
-        test.add("Geisel Library");
-        test.add("Price Center");
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, test );
-        lv.setAdapter(arrayAdapter);
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
-            }
-        });
+        if(toolbar != null) getSupportActionBar().setTitle("Partner's Visited Locations");
+        initializeComponents();
     }
 
     @Override
@@ -78,5 +63,22 @@ public class HomePage extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void initializeComponents(){
+        ListView lv = (ListView) findViewById(R.id.visits);
+        ArrayList<String> listofLocations = new ArrayList<String>();
+
+        listofLocations.add("Geisel Library");
+        listofLocations.add("Price Center");
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listofLocations);
+        lv.setAdapter(arrayAdapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
