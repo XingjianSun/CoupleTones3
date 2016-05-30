@@ -13,10 +13,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 import java.util.ArrayList;
 
 //homepage UI+ login
 public class HomePage extends AppCompatActivity {
+    ListView lv;
+    ArrayList <String> listofLocations;
+    ArrayAdapter<String> arrayAdapter;
+    Firebase firebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,20 +73,42 @@ public class HomePage extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected  void onStart(){
+        super.onStart();
+        firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
+        firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String data = dataSnapshot.getValue(String.class);
+                String toAdd = data.substring(16);
+                listofLocations.add(toAdd);
+                arrayAdapter.add(toAdd);
+                lv.setAdapter(arrayAdapter);
+                Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {}
+        });
+    }
+
+
     private void initializeComponents(){
-        ListView lv = (ListView) findViewById(R.id.visits);
-        ArrayList<String> listofLocations = new ArrayList<String>();
+        lv = (ListView) findViewById(R.id.visits);
+        listofLocations = new ArrayList<String>();
 
         listofLocations.add("Geisel Library");
         listofLocations.add("Price Center");
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listofLocations);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listofLocations);
         lv.setAdapter(arrayAdapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
             }
         });
     }

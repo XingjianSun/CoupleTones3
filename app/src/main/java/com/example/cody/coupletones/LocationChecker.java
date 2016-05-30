@@ -1,5 +1,6 @@
 package com.example.cody.coupletones;
 
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
@@ -10,10 +11,15 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.firebase.client.realtime.util.StringListReader;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+
 /*
     * a class that takes care adding new favorite locations and
     * checking valid visit
@@ -47,15 +53,15 @@ public class LocationChecker extends AppCompatActivity{
         if(myFavLocs.isEmpty()) {
             return false;
         }
-        while(it.hasNext()){
-            Map.Entry pair = (Map.Entry)it.next();
+        while(it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
             Location toComp = (Location) pair.getValue();
             float dist = location.distanceTo(toComp);
-            if(dist <= check){
+            if (dist <= check) {
                 Log.v("Visit", "A Visit has occurred!!");
-                if(!test){
+                if (!test) {
                     MainActivity.firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
-                    MainActivity.firebase.setValue("Your partner has visited "+pair.getKey());
+                    MainActivity.firebase.setValue("Your partner has visited " + pair.getKey());
                 }
                 return true;
             }

@@ -97,17 +97,7 @@ public class MainActivity extends AppCompatActivity {
     password = (EditText)findViewById(R.id.password);
     login = (Button)findViewById(R.id.button);
     register = (Button)findViewById(R.id.register);
-    firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
-    firebase.addValueEventListener(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        String data = dataSnapshot.getValue(String.class);
-        Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
-      }
-      
-      @Override
-      public void onCancelled(FirebaseError firebaseError) {}
-    });
+
     login.setOnClickListener(new View.OnClickListener() {
       @Override //k
       public void onClick(View view) {
