@@ -14,7 +14,7 @@ import android.widget.TextView;
 /*
     * Used to toggle whether to have sound, vibration, or nothing
  */
-public class notificationSettings extends AppCompatActivity {
+public class NotificationSettings extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

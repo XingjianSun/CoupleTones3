@@ -41,13 +41,14 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     SharedPreferences sharedPreferences = getSharedPreferences("partner_info", MODE_PRIVATE);
     setContentView(R.layout.activity_main);
+
     /*if(sharedPreferences.getString("Partner's phone number", "").length() == 10 ||
      sharedPreferences.getString("Partner's phone number", "").length() == 4){
      Intent i = new Intent(MainActivity.this, HomePage.class);
      startActivity(i);
      }
      else {
-     setContentView(R.layout.activity_main);
+     setContentView(R.layout.activity_main);*/
      Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
      TextView title = (TextView) findViewById(R.id.title);
      TextView button = (TextView) findViewById(R.id.button);
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
      if(register != null) register.setTypeface(font);
      if(email != null) email.setTypeface(font);
      if(password != null) password.setTypeface(font);
-     
+     /*
      Button login = (Button) findViewById(R.id.button);
      enterPhoneNo();
      login.setOnClickListener(new View.OnClickListener() {
@@ -88,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
      }
      });
      }*/
-    
-    
+
+
   }
   protected void onStart(){
     super.onStart();

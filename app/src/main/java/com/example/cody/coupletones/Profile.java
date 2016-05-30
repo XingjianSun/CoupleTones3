@@ -89,7 +89,7 @@ public class Profile extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Profile.this, notificationSettings.class);
+                Intent i = new Intent(Profile.this, NotificationSettings.class);
                 startActivity(i);
             }
         });
