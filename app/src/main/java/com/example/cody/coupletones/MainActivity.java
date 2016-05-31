@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         
         if (checkLogin(Email,Password)) {
           
-          Intent i = new Intent(MainActivity.this, HomePage.class);
+          Intent i = new Intent(MainActivity.this, AddFriend.class);
           startActivity(i);
         }
         else{
@@ -118,10 +118,10 @@ public class MainActivity extends AppCompatActivity {
       }
     });
     register.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        registration();
-      }
+        @Override
+        public void onClick(View view) {
+            registration();
+        }
     });
   }
   
@@ -197,17 +197,26 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(DialogInterface dialog, int which) {
         //TODO
-        if (name.getText().toString() == null || email.getText().toString() == null
+        if (name.getText().toString() == "" || email.getText().toString() == null
             || password.getText().toString() == null || verify.getText().toString() == null) {
-          Toast.makeText(getBaseContext(), "some information missing, try again", Toast.LENGTH_LONG).show();
+          Toast.makeText(getBaseContext(), "Missing Some Required Fields", Toast.LENGTH_LONG).show();
         }
-        if (!password.getText().toString().equals(verify.getText().toString())) {
-          Toast.makeText(getBaseContext(), "password entered not the same, try again", Toast.LENGTH_LONG).show();
-        } else {
+        else if (password.getText().toString().equals("")) {
+            Toast.makeText(getBaseContext(), "Password Cannot be Empty", Toast.LENGTH_LONG).show();
+        }
+        else if (!password.getText().toString().equals(verify.getText().toString())) {
+          Toast.makeText(getBaseContext(), "Passwords Do Not Match", Toast.LENGTH_LONG).show();
+        }
+        else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
+            Toast.makeText(getBaseContext(), "Invalid Email", Toast.LENGTH_LONG).show();
+        }
+        else {
           uname = name.getText().toString();
           uemail = email.getText().toString();
           upassword = password.getText().toString();
-          Toast.makeText(getBaseContext(), "register success", Toast.LENGTH_LONG).show();
+          Toast.makeText(getBaseContext(), "Register Success", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(MainActivity.this, AddFriend.class);
+            startActivity(i);
         }
       }
     });
@@ -222,12 +231,12 @@ public class MainActivity extends AppCompatActivity {
   }
   
   public boolean checkLogin(String Email, String Password){
-    if(Email.equals(uemail)&& Password.equals(upassword)){
+    if(Email.equals(uemail)&& Password.equals(upassword) && android.util.Patterns.EMAIL_ADDRESS.matcher(uemail).matches()){
       Toast.makeText(getBaseContext(), "Login success", Toast.LENGTH_LONG).show();
       return true;
     }
     else{
-      Toast.makeText(getBaseContext(), "wrong email/password", Toast.LENGTH_LONG).show();
+      Toast.makeText(getBaseContext(), "Invalid Email or Password", Toast.LENGTH_LONG).show();
       // Toast.makeText(getBaseContext(), uemail, Toast.LENGTH_LONG).show();
       return false;
     }

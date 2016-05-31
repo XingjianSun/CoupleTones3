@@ -41,7 +41,7 @@ public class HomePage extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) setSupportActionBar(toolbar);
         if (toolbar != null) getSupportActionBar().setTitle("Partner's Visited Locations");
-        if(uemail == "") addFriend();
+        //if(uemail == "") addFriend();
         initializeComponents();
     }
 
@@ -151,25 +151,6 @@ public class HomePage extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-        /*
-        builder.setOnShowListener(new DialogInterface.OnShowListener() {
-
-            @Override
-            public void onShow(DialogInterface dialog) {
-
-                Button b = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                b.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        // TODO Do something
-
-                        //Dismiss once everything is OK.
-                        d.dismiss();
-                    }
-                });
-            }
-        });*/
         builder.show();
     }
 }

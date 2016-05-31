@@ -120,7 +120,11 @@ public class Profile extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("partner_info", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("Partner's phone number", "");
-        editor.apply();
-        MainActivity.firebase.setValue("Logged out");
+        //TODO: The 2 Lines Below Cause Runtime Errors that Prevents Proper LogOut
+        //editor.apply();
+        //MainActivity.firebase.setValue("Logged out");
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
