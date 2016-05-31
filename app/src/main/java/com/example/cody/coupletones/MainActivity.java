@@ -165,15 +165,15 @@ public class MainActivity extends AppCompatActivity {
     name.setTypeface(font);
     name.setTextColor(Color.parseColor("#9d4747"));
     layout.addView(name);
-    
-    
+
+
     final EditText email = new EditText(this);
     email.setHint("Email");
     email.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
     email.setTypeface(font);
     email.setTextColor(Color.parseColor("#9d4747"));
     layout.addView(email);
-    
+
     final EditText password = new EditText(this);
     password.setHint("Password");
     password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -181,8 +181,8 @@ public class MainActivity extends AppCompatActivity {
     password.setTypeface(font);
     password.setTextColor(Color.parseColor("#9d4747"));
     layout.addView(password);
-    
-    
+
+
     final EditText verify = new EditText(this);
     verify.setHint("Verify Password");
     verify.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -190,43 +190,64 @@ public class MainActivity extends AppCompatActivity {
     verify.setTypeface(font);
     verify.setTextColor(Color.parseColor("#9d4747"));
     layout.addView(verify);
-    
+
     builder.setView(layout);
-    
+
     builder.setPositiveButton("Register", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int which) {
-        //TODO
-        if (name.getText().toString() == "" || email.getText().toString() == null
-            || password.getText().toString() == null || verify.getText().toString() == null) {
-          Toast.makeText(getBaseContext(), "Missing Some Required Fields", Toast.LENGTH_LONG).show();
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            //TODO
+            /*if (name.getText().toString() == "" || email.getText().toString() == null
+                    || password.getText().toString() == null || verify.getText().toString() == null) {
+                Toast.makeText(getBaseContext(), "Missing Some Required Fields", Toast.LENGTH_LONG).show();
+            } else if (password.getText().toString().equals("")) {
+                Toast.makeText(getBaseContext(), "Password Cannot be Empty", Toast.LENGTH_LONG).show();
+            } else if (!password.getText().toString().equals(verify.getText().toString())) {
+                Toast.makeText(getBaseContext(), "Passwords Do Not Match", Toast.LENGTH_LONG).show();
+            } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
+                Toast.makeText(getBaseContext(), "Invalid Email", Toast.LENGTH_LONG).show();
+            } else {
+                uname = name.getText().toString();
+                uemail = email.getText().toString();
+                upassword = password.getText().toString();
+                Toast.makeText(getBaseContext(), "Register Success", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(MainActivity.this, AddFriend.class);
+                startActivity(i);
+            }*/
         }
-        else if (password.getText().toString().equals("")) {
-            Toast.makeText(getBaseContext(), "Password Cannot be Empty", Toast.LENGTH_LONG).show();
-        }
-        else if (!password.getText().toString().equals(verify.getText().toString())) {
-          Toast.makeText(getBaseContext(), "Passwords Do Not Match", Toast.LENGTH_LONG).show();
-        }
-        else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
-            Toast.makeText(getBaseContext(), "Invalid Email", Toast.LENGTH_LONG).show();
-        }
-        else {
-          uname = name.getText().toString();
-          uemail = email.getText().toString();
-          upassword = password.getText().toString();
-          Toast.makeText(getBaseContext(), "Register Success", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(MainActivity.this, AddFriend.class);
-            startActivity(i);
-        }
-      }
     });
     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int which) {
-        dialog.cancel();
-      }
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            dialog.cancel();
+        }
     });
-    builder.show();
+    final AlertDialog toShow = builder.create();
+    toShow.show();
+    toShow.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (name.getText().toString() == "" || email.getText().toString() == null
+                    || password.getText().toString() == null || verify.getText().toString() == null) {
+                Toast.makeText(getBaseContext(), "Missing Some Required Fields", Toast.LENGTH_LONG).show();
+            } else if (password.getText().toString().equals("")) {
+                Toast.makeText(getBaseContext(), "Password Cannot be Empty", Toast.LENGTH_LONG).show();
+            } else if (!password.getText().toString().equals(verify.getText().toString())) {
+                Toast.makeText(getBaseContext(), "Passwords Do Not Match", Toast.LENGTH_LONG).show();
+            } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
+                Toast.makeText(getBaseContext(), "Invalid Email", Toast.LENGTH_LONG).show();
+            } else {
+                uname = name.getText().toString();
+                uemail = email.getText().toString();
+                upassword = password.getText().toString();
+                Toast.makeText(getBaseContext(), "Register Success", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(MainActivity.this, AddFriend.class);
+                startActivity(i);
+                toShow.dismiss();
+            }
+        }
+    });
+
     //TODO - if password != veriypassword, then show and send toast that they don't match
   }
   

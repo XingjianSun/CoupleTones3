@@ -41,7 +41,7 @@ public class Favorites extends AppCompatActivity {
         partnerFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Toast.makeText(getBaseContext(), "Test Partner Favorites", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Test Partner Favorites", Toast.LENGTH_LONG).show();
             }
         });
     }

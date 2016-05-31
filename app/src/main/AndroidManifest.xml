@@ -95,7 +95,11 @@
         <activity
             android:name=".AddFriend"
             android:label="@string/title_activity_add_friend"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ItemView"
+            android:label="@string/title_activity_item_view"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
