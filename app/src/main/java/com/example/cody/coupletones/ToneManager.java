@@ -11,16 +11,16 @@ import java.util.HashMap;
  */
 public class ToneManager extends AppCompatActivity {
     public static HashMap myTones;
-    private SharedPreferences sharedPreferences, SharedPreferences;
-    android.content.SharedPreferences.Editor editor;
+   // private SharedPreferences sharedPreferences, SharedPreferences;
+   // android.content.SharedPreferences.Editor editor;
     public ToneManager() {
         myTones = new HashMap();
-        sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
-         editor = sharedPreferences.edit();
     }
 
     public void addTone(String location, String tone){
         myTones.put(location,tone);
+       SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(location,tone);
         editor.apply();
     }
