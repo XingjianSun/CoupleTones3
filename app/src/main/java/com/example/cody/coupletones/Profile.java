@@ -100,6 +100,9 @@ public class Profile extends AppCompatActivity {
         // Set fonts for objects in the activity page
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
         TextView name = (TextView) findViewById(R.id.name);
+        if(MainActivity.uname != null) {
+            name.setText(MainActivity.uname);
+        }
 
         Button view_favorites = (Button) findViewById(R.id.view_favorites);
         Button log_out = (Button) findViewById(R.id.log_out_button);
