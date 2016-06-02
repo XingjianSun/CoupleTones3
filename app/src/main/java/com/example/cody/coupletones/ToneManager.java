@@ -19,7 +19,7 @@ public class ToneManager extends AppCompatActivity {
 
     public void addTone(String location, String tone){
         myTones.put(location,tone);
-       SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
+        SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(location,tone);
         editor.apply();

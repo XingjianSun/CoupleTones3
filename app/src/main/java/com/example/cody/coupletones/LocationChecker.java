@@ -48,6 +48,10 @@ public class LocationChecker extends AppCompatActivity{
             return false;
         }
         myFavLocs.put(name, currLocation);
+        SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(name,"default");
+        editor.apply();
         Log.v("Success", "Successfully added Location");
 
         return true;
@@ -68,6 +72,8 @@ public class LocationChecker extends AppCompatActivity{
                     current = toComp;
                     MainActivity.firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
                     MainActivity.firebase.setValue("Your partner has visited " + pair.getKey());
+                    SharedPreferences sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
+                    String name = sharedPreferences.getString(currentlyAt, "");
                 }
                 return true;
             }

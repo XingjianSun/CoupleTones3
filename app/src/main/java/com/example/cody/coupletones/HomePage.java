@@ -33,6 +33,7 @@ public class HomePage extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     Firebase firebase;
     static String uemail = "";
+    boolean init = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
