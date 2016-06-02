@@ -30,7 +30,7 @@ public class ToneManager extends AppCompatActivity {
             myTones.put(location, tone);
         }
         else {
-            Toast.makeText(getBaseContext(), "no such location", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "No Such Location", Toast.LENGTH_LONG).show();
         }
     }
 

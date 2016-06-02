@@ -107,20 +107,20 @@ public class Favorites extends AppCompatActivity {
                 final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                         Favorites.this,
                         android.R.layout.select_dialog_singlechoice);
-                arrayAdapter.add("default");
-                arrayAdapter.add("relax");
-                arrayAdapter.add("inception");
-                arrayAdapter.add("sona");
-                arrayAdapter.add("whistle");
-                arrayAdapter.add("horn");
-                arrayAdapter.add("guitar");
-                arrayAdapter.add("chime");
-                arrayAdapter.add("success");
-                arrayAdapter.add("bells");
+                arrayAdapter.add("Default");
+                arrayAdapter.add("Relax");
+                arrayAdapter.add("Inception");
+                arrayAdapter.add("Sona");
+                arrayAdapter.add("Whistle");
+                arrayAdapter.add("Horn");
+                arrayAdapter.add("Guitar");
+                arrayAdapter.add("Chime");
+                arrayAdapter.add("Success");
+                arrayAdapter.add("Bells");
 
 
                 builderSingle.setNegativeButton(
-                        "cancel",
+                        "Cancel",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -147,43 +147,43 @@ public class Favorites extends AppCompatActivity {
                                 try {
 
                                     switch(toneName) {
-                                        case "default":
+                                        case "Default":
                                             player = MediaPlayer.create(Favorites.this, R.raw.default1);
                                             userChoice = 1;
                                             break;
-                                        case "relax":
+                                        case "Relax":
                                             player = MediaPlayer.create(Favorites.this, R.raw.relax);
                                             userChoice = 2;
                                             break;
-                                        case "inception":
+                                        case "Inception":
                                             player = MediaPlayer.create(Favorites.this, R.raw.inception);
                                             userChoice = 3;
                                             break;
-                                        case "sona":
+                                        case "Sona":
                                             player = MediaPlayer.create(Favorites.this, R.raw.sona);
                                             userChoice = 1;
                                             break;
-                                        case "whistle":
+                                        case "Whistle":
                                             player = MediaPlayer.create(Favorites.this, R.raw.whistle);
                                             userChoice = 2;
                                             break;
-                                        case "horn":
+                                        case "Horn":
                                             player = MediaPlayer.create(Favorites.this, R.raw.horn);
                                             userChoice = 3;
                                             break;
-                                        case "success":
+                                        case "Success":
                                             player = MediaPlayer.create(Favorites.this, R.raw.success);
                                             userChoice = 1;
                                             break;
-                                        case "guitar":
+                                        case "Guitar":
                                             player = MediaPlayer.create(Favorites.this, R.raw.guitar);
                                             userChoice = 2;
                                             break;
-                                        case "bells":
+                                        case "Bells":
                                             player = MediaPlayer.create(Favorites.this, R.raw.bells);
                                             userChoice = 3;
                                             break;
-                                        case "chime":
+                                        case "Chime":
                                             player = MediaPlayer.create(Favorites.this, R.raw.chime);
                                             userChoice = 1;
                                             break;
