@@ -35,6 +35,20 @@ public class HomePage extends AppCompatActivity {
         if(toolbar!= null) setSupportActionBar(toolbar);
         if(toolbar != null) getSupportActionBar().setTitle("Partner's Visited Locations");
         initializeComponents();
+        firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
+        firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String data = dataSnapshot.getValue(String.class);
+                String toAdd = data.substring(16);
+                listofLocations.add(toAdd);
+                lv.setAdapter(arrayAdapter);
+                Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {}
+        });
     }
 
     @Override
@@ -77,21 +91,6 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected  void onStart(){
         super.onStart();
-        firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
-        firebase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String data = dataSnapshot.getValue(String.class);
-                String toAdd = data.substring(16);
-                listofLocations.add(toAdd);
-                arrayAdapter.add(toAdd);
-                lv.setAdapter(arrayAdapter);
-                Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {}
-        });
     }
 
 
@@ -108,7 +107,7 @@ public class HomePage extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
             }
         });
     }

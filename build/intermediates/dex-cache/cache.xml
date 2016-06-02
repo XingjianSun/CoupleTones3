@@ -82,7 +82,7 @@
         jar="C:\Users\Omnit\Desktop\ANDROID STUDIO PROJECTS\COUPLETONES\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="4e904f709576a937046928ac93bad2c0789598ac">
+        sha1="4fc0991a57b35ebc4c3b9b66f16337230c3384c5">
         <dex dex="C:\Users\Omnit\Desktop\ANDROID STUDIO PROJECTS\COUPLETONES\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_b3e3d3ca4e30255ab89d321a05414e1cd0e18465\classes.dex" />
     </item>
     <item
@@ -117,7 +117,7 @@
         jar="C:\Users\Omnit\Desktop\ANDROID STUDIO PROJECTS\COUPLETONES\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="87b0899c48eb1f69065f9825f3d3c415508c1c71">
+        sha1="7d44c35c4ba61858ee1db972a201efcf78d928c8">
         <dex dex="C:\Users\Omnit\Desktop\ANDROID STUDIO PROJECTS\COUPLETONES\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_7a2e2ef1e1987ac37ad211801fc7cb9e2c4ca761\classes.dex" />
     </item>
     <item
