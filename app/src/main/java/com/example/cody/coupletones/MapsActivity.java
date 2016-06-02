@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -147,6 +148,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             if(locationChecker.addLocation(name, toAdd)){
                 mMap.addMarker(new MarkerOptions().position(new LatLng(toAdd.getLatitude(),
                         toAdd.getLongitude())).title(name));
+                Toast.makeText(getBaseContext(), name + " Added!", Toast.LENGTH_LONG).show();
             }
         }
     }

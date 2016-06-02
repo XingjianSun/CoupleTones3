@@ -26,6 +26,8 @@ public class Favorites extends AppCompatActivity {
 
     private ToneManager toneManager;
     private Vibrator vibrate;
+    public static ArrayList<String> listofLocations = new ArrayList<String>();
+    public static ArrayAdapter<String> arrayAdapter;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -63,7 +65,7 @@ public class Favorites extends AppCompatActivity {
         partnerFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  Toast.makeText(getBaseContext(), "Test Partner Favorites", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Test Partner Favorites", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -78,12 +80,8 @@ public class Favorites extends AppCompatActivity {
         vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         toneManager = new ToneManager();
         ListView lv = (ListView) findViewById(R.id.visits);
-        ArrayList<String> listofLocations = new ArrayList<String>();
 
-        listofLocations.add("Geisel Library");
-        listofLocations.add("Price Center");
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listofLocations);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listofLocations);
         lv.setAdapter(arrayAdapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -100,7 +98,7 @@ public class Favorites extends AppCompatActivity {
                 initializeAdaptor(arrayAdapter);
 
                 builderSingle.setNegativeButton(
-                        "cancel",
+                        "Cancel",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -167,16 +165,16 @@ public class Favorites extends AppCompatActivity {
     }
 
     public void initializeAdaptor(ArrayAdapter arrayAdapter){
-        arrayAdapter.add("default");
-        arrayAdapter.add("relax");
-        arrayAdapter.add("inception");
-        arrayAdapter.add("sona");
-        arrayAdapter.add("whistle");
-        arrayAdapter.add("horn");
-        arrayAdapter.add("guitar");
-        arrayAdapter.add("chime");
-        arrayAdapter.add("success");
-        arrayAdapter.add("bells");
+        arrayAdapter.add("Default");
+        arrayAdapter.add("Relax");
+        arrayAdapter.add("Inception");
+        arrayAdapter.add("Sona");
+        arrayAdapter.add("Whistle");
+        arrayAdapter.add("Horn");
+        arrayAdapter.add("Guitar");
+        arrayAdapter.add("Chime");
+        arrayAdapter.add("Success");
+        arrayAdapter.add("Bells");
     }
 
     @Override

@@ -48,12 +48,14 @@ public class LocationChecker extends AppCompatActivity{
             return false;
         }
         myFavLocs.put(name, currLocation);
-        SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
+        Favorites.arrayAdapter.add(name);
+
+        //TODO does not work
+        /*SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(name,"default");
-        editor.apply();
+        editor.apply();*/
         Log.v("Success", "Successfully added Location");
-
         return true;
     }
     public boolean checkForVisit(Location location, boolean test){
