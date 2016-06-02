@@ -48,6 +48,10 @@ public class LocationChecker extends AppCompatActivity{
             return false;
         }
         myFavLocs.put(name, currLocation);
+        SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(name,"default");
+        editor.apply();
         Log.v("Success", "Successfully added Location");
 
         return true;
