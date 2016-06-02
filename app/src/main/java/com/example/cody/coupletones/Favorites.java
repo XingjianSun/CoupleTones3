@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -15,9 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -76,16 +72,10 @@ public class Favorites extends AppCompatActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
         Button userFavorites = (Button) findViewById(R.id.user_favorites);
         Button partnerFavorites = (Button) findViewById(R.id.partner_favorites);
-
         if (userFavorites != null) userFavorites.setTypeface(font);
         if (partnerFavorites != null) partnerFavorites.setTypeface(font);
 
         vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        final long[] once = { 0, 100 };
-        final long[] twice = { 0, 100, 400, 100 };
-        final long[] thrice = { 0, 100, 400, 100, 400, 100 };
-
-
         toneManager = new ToneManager();
         ListView lv = (ListView) findViewById(R.id.visits);
         ArrayList<String> listofLocations = new ArrayList<String>();
@@ -107,20 +97,10 @@ public class Favorites extends AppCompatActivity {
                 final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                         Favorites.this,
                         android.R.layout.select_dialog_singlechoice);
-                arrayAdapter.add("Default");
-                arrayAdapter.add("Relax");
-                arrayAdapter.add("Inception");
-                arrayAdapter.add("Sona");
-                arrayAdapter.add("Whistle");
-                arrayAdapter.add("Horn");
-                arrayAdapter.add("Guitar");
-                arrayAdapter.add("Chime");
-                arrayAdapter.add("Success");
-                arrayAdapter.add("Bells");
-
+                initializeAdaptor(arrayAdapter);
 
                 builderSingle.setNegativeButton(
-                        "Cancel",
+                        "cancel",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -131,7 +111,7 @@ public class Favorites extends AppCompatActivity {
                 AlertDialog.Builder cancel = builderSingle.setAdapter(
                         arrayAdapter,
                         new DialogInterface.OnClickListener() {
-                            int userChoice = 1;
+
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 final String toneName = arrayAdapter.getItem(which);
@@ -140,74 +120,12 @@ public class Favorites extends AppCompatActivity {
                                 builderInner.setMessage(toneName);
                                 builderInner.setTitle("Your Selected Tone is");
 
-                                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                                 MediaPlayer player = MediaPlayer.create(Favorites.this, R.raw.default1);
-
-
-                                try {
-
-                                    switch(toneName) {
-                                        case "Default":
-                                            player = MediaPlayer.create(Favorites.this, R.raw.default1);
-                                            userChoice = 1;
-                                            break;
-                                        case "Relax":
-                                            player = MediaPlayer.create(Favorites.this, R.raw.relax);
-                                            userChoice = 2;
-                                            break;
-                                        case "Inception":
-                                            player = MediaPlayer.create(Favorites.this, R.raw.inception);
-                                            userChoice = 3;
-                                            break;
-                                        case "Sona":
-                                            player = MediaPlayer.create(Favorites.this, R.raw.sona);
-                                            userChoice = 1;
-                                            break;
-                                        case "Whistle":
-                                            player = MediaPlayer.create(Favorites.this, R.raw.whistle);
-                                            userChoice = 2;
-                                            break;
-                                        case "Horn":
-                                            player = MediaPlayer.create(Favorites.this, R.raw.horn);
-                                            userChoice = 3;
-                                            break;
-                                        case "Success":
-                                            player = MediaPlayer.create(Favorites.this, R.raw.success);
-                                            userChoice = 1;
-                                            break;
-                                        case "Guitar":
-                                            player = MediaPlayer.create(Favorites.this, R.raw.guitar);
-                                            userChoice = 2;
-                                            break;
-                                        case "Bells":
-                                            player = MediaPlayer.create(Favorites.this, R.raw.bells);
-                                            userChoice = 3;
-                                            break;
-                                        case "Chime":
-                                            player = MediaPlayer.create(Favorites.this, R.raw.chime);
-                                            userChoice = 1;
-                                            break;
-                                        default:break;
-                                    }
-
-                                    switch(userChoice){
-                                        case 1: vibrate.vibrate(once, -1);
-                                            break;
-                                        case 2: vibrate.vibrate(twice,-1);
-                                            break;
-                                        case 3: vibrate.vibrate(thrice,-1);
-                                            break;
-                                        default: break;
-
-                                    }
-
-                                    player.start();
+                                Tone tone = new Tone (toneName,vibrate);
+                                tone.play(Favorites.this);
 
 
 
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
 
                                 AlertDialog.Builder builder = builderInner.setPositiveButton(
                                         "Set As Tone",
@@ -219,11 +137,8 @@ public class Favorites extends AppCompatActivity {
                                                 toneManager.addTone((String) parent.getItemAtPosition(position), toneName);
                                                 //Toast.makeText(getBaseContext(), (String)toneManager.myTones.get("Geisel Library"), Toast.LENGTH_LONG).show();
                                                 dialog.dismiss();
-
                                             }
                                         });
-
-
                                 builderInner.setNegativeButton(
                                         "Cancel",
                                         new DialogInterface.OnClickListener() {
@@ -249,6 +164,19 @@ public class Favorites extends AppCompatActivity {
                                }
         });
 
+    }
+
+    public void initializeAdaptor(ArrayAdapter arrayAdapter){
+        arrayAdapter.add("default");
+        arrayAdapter.add("relax");
+        arrayAdapter.add("inception");
+        arrayAdapter.add("sona");
+        arrayAdapter.add("whistle");
+        arrayAdapter.add("horn");
+        arrayAdapter.add("guitar");
+        arrayAdapter.add("chime");
+        arrayAdapter.add("success");
+        arrayAdapter.add("bells");
     }
 
     @Override
