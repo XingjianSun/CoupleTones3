@@ -89,7 +89,7 @@ public class Profile extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Profile.this, notificationSettings.class);
+                Intent i = new Intent(Profile.this, NotificationSettings.class);
                 startActivity(i);
             }
         });
@@ -100,6 +100,9 @@ public class Profile extends AppCompatActivity {
         // Set fonts for objects in the activity page
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
         TextView name = (TextView) findViewById(R.id.name);
+        if(MainActivity.uname != null) {
+            name.setText(MainActivity.uname);
+        }
 
         Button view_favorites = (Button) findViewById(R.id.view_favorites);
         Button log_out = (Button) findViewById(R.id.log_out_button);
@@ -120,7 +123,11 @@ public class Profile extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("partner_info", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("Partner's phone number", "");
-        editor.apply();
-        MainActivity.firebase.setValue("Logged out");
+        //TODO: The 2 Lines Below Cause Runtime Errors that Prevents Proper LogOut
+        //editor.apply();
+        //MainActivity.firebase.setValue("Logged out");
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

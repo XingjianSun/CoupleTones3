@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.cody.coupletones.AddFriend"
+    tools:showIn="@layout/activity_add_friend">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/partner_email"
+        android:textColor="#9d4747"
+        android:minWidth="200dp"
+        android:hint="Partner Email"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Partner"
+        android:id="@+id/add_partner_button"
+        android:background="#ccb65d5d"
+        android:shadowColor="#ffffff"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:minWidth="200dp"
+        android:nestedScrollingEnabled="false"
+        android:onClick="loginClick"
+        android:layout_below="@+id/partner_email"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/add_partner_text"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Partner"
+        android:textColor="#9d4747"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:stateListAnimator="@null"
+        android:layout_above="@+id/partner_email"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/coupletones_icon"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:id="@+id/imageView2"
+        android:layout_above="@+id/add_partner_text"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
