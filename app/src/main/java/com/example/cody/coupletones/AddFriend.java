@@ -24,7 +24,7 @@ import com.firebase.client.ValueEventListener;
 
 public class AddFriend extends AppCompatActivity {
 
-    static String partner; //holds email of partner
+    static String partner = ""; //holds email of partner
     static String potentialPartner;
 
     @Override
@@ -33,32 +33,33 @@ public class AddFriend extends AppCompatActivity {
         setContentView(R.layout.activity_add_friend);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
-
         TextView addPartnerText = (TextView) findViewById(R.id.add_partner_text);
         final EditText partnerEmail = (EditText) findViewById(R.id.partner_email);
         final Button addPartnerButton = (Button) findViewById(R.id.add_partner_button);
         if(addPartnerText != null) addPartnerText.setTypeface(font);
         if(partnerEmail != null) partnerEmail.setTypeface(font);
         if(addPartnerButton != null) addPartnerButton.setTypeface(font);
-        Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname);
+        addPartnerListener();
+        /*Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-        firebase.addValueEventListener(new ValueEventListener() {
+        firebase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 if(user.toString() == "Accepted"){
+                    Toast.makeText(getBaseContext(), "if", Toast.LENGTH_LONG).show();
                     partner = potentialPartner;
                     Intent i = new Intent(AddFriend.this, HomePage.class);
                     startActivity(i);
                 }
                 else if(user.toString() == "Declined")
                 {
+                    Toast.makeText(getBaseContext(), "else if", Toast.LENGTH_LONG).show();
                     potentialPartner = "";
                 }
                 else {
+                    Toast.makeText(getBaseContext(), "else", Toast.LENGTH_LONG).show();
                     alertDialogBuilder.setTitle(user.toString() + " would like to add you as their partner! Would you like to add them back?");
                     alertDialogBuilder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         @Override
@@ -86,7 +87,7 @@ public class AddFriend extends AppCompatActivity {
             @Override
             public void onCancelled(FirebaseError firebaseError) {}
         });
-        addPartnerListener();
+*/
     }
 
     @Override
@@ -106,17 +107,23 @@ public class AddFriend extends AppCompatActivity {
     private void addPartnerListener()
     {
         Button addPartnerButton = (Button) findViewById(R.id.add_partner_button);
-        final EditText email = (EditText) findViewById(R.id.partner_email);
+        final EditText name = (EditText) findViewById(R.id.partner_email);
         addPartnerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                potentialPartner = email.getText().toString();
-                Query query = MainActivity.mainFireBase.orderByChild("users").equalTo(email.getText().toString());
-                query.addChildEventListener(new ChildEventListener() {
+                Firebase firebase = MainActivity.mainFireBase.child("users").child(name.getText().toString());
+                firebase.setValue(MainActivity.uname);
+                Intent i = new Intent(AddFriend.this, HomePage.class);
+                startActivity(i);
+                /*potentialPartner = email.getText().toString();
+                //Query query = MainActivity.mainFireBase.orderByChild("users").equalTo(email.getText().toString());
+                //query.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         Firebase firebase = MainActivity.mainFireBase.child("users").child(email.getText().toString());
                         firebase.setValue(MainActivity.uemail);
+                        Intent i = new Intent(AddFriend.this, HomePage.class);
+                        startActivity(i);
                     }
 
                     @Override
@@ -138,16 +145,7 @@ public class AddFriend extends AppCompatActivity {
                     public void onCancelled(FirebaseError firebaseError) {
 
                     }
-                });
-                /*if (android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
-                    partnerEmail = email.getText().toString();
-                    Toast.makeText(getBaseContext(), "Successful Add", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(AddFriend.this, HomePage.class);
-                    startActivity(i);
-                }
-                else {
-
-                }*/
+                });*/
             }
         });
     }

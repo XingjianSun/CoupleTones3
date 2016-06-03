@@ -27,8 +27,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cody/coupletones/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="58" column="69" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
+            <state vertical-scroll-proportion="-4.0">
+              <caret line="200" column="12" selection-start-line="200" selection-start-column="12" selection-end-line="200" selection-end-column="88" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2606#3124#0" expanded="true" />
@@ -47,15 +47,11 @@
       <file leaf-file-name="AddFriend.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cody/coupletones/AddFriend.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.511628">
-              <caret line="76" column="139" selection-start-line="76" selection-start-column="139" selection-end-line="76" selection-end-column="139" />
+            <state vertical-scroll-proportion="0.3929471">
+              <caret line="114" column="52" selection-start-line="114" selection-start-column="52" selection-end-line="114" selection-end-column="52" />
               <folding>
-                <element signature="e#2771#3388#0" expanded="true" />
-                <element signature="e#3387#3388#0" expanded="true" />
-                <element signature="e#3459#3907#0" expanded="true" />
-                <element signature="e#3906#3907#0" expanded="true" />
-                <element signature="e#4648#6333#0" expanded="true" />
-                <element signature="e#6332#6333#0" expanded="true" />
+                <element signature="e#4928#6570#0" expanded="true" />
+                <element signature="e#6569#6570#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -81,8 +77,8 @@
       <file leaf-file-name="HomePage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cody/coupletones/HomePage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="47" column="55" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
+            <state vertical-scroll-proportion="-4.0">
+              <caret line="142" column="61" selection-start-line="142" selection-start-column="54" selection-end-line="142" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -2507,14 +2503,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cody/coupletones/HomePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="55" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cody/coupletones/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2530,10 +2518,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cody/coupletones/HomePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.0">
+          <caret line="142" column="61" selection-start-line="142" selection-start-column="54" selection-end-line="142" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cody/coupletones/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="69" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
+        <state vertical-scroll-proportion="-4.0">
+          <caret line="200" column="12" selection-start-line="200" selection-start-column="12" selection-end-line="200" selection-end-column="88" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2606#3124#0" expanded="true" />
@@ -2550,15 +2546,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cody/coupletones/AddFriend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.511628">
-          <caret line="76" column="139" selection-start-line="76" selection-start-column="139" selection-end-line="76" selection-end-column="139" />
+        <state vertical-scroll-proportion="0.3929471">
+          <caret line="114" column="52" selection-start-line="114" selection-start-column="52" selection-end-line="114" selection-end-column="52" />
           <folding>
-            <element signature="e#2771#3388#0" expanded="true" />
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3459#3907#0" expanded="true" />
-            <element signature="e#3906#3907#0" expanded="true" />
-            <element signature="e#4648#6333#0" expanded="true" />
-            <element signature="e#6332#6333#0" expanded="true" />
+            <element signature="e#4928#6570#0" expanded="true" />
+            <element signature="e#6569#6570#0" expanded="true" />
           </folding>
         </state>
       </provider>
