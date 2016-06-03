@@ -48,7 +48,7 @@ public class LocationChecker extends AppCompatActivity{
             return false;
         }
         myFavLocs.put(name, currLocation);
-        Favorites.arrayAdapter.add(name);
+//        Favorites.arrayAdapter.add(name);
 
         //TODO does not work
         /*SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
