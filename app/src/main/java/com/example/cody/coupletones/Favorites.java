@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cody.coupletones.tones.sonaTone;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -131,7 +132,7 @@ public class Favorites extends AppCompatActivity {
                                 builderInner.setTitle("Your Selected Tone is");
 
                                 MediaPlayer player = MediaPlayer.create(Favorites.this, R.raw.default1);
-                                Tone tone = new Tone(toneName, vibrate);
+                                Tone tone = new sonaTone(vibrate);
                                 tone.play(Favorites.this);
 
 
@@ -176,16 +177,16 @@ public class Favorites extends AppCompatActivity {
 
 
     public void initializeAdaptor(ArrayAdapter arrayAdapter){
-        arrayAdapter.add("Default");
-        arrayAdapter.add("Relax");
-        arrayAdapter.add("Inception");
-        arrayAdapter.add("Sona");
-        arrayAdapter.add("Whistle");
-        arrayAdapter.add("Horn");
-        arrayAdapter.add("Guitar");
-        arrayAdapter.add("Chime");
-        arrayAdapter.add("Success");
-        arrayAdapter.add("Bells");
+        arrayAdapter.add("default");
+        arrayAdapter.add("relax");
+        arrayAdapter.add("inception");
+        arrayAdapter.add("sona");
+        arrayAdapter.add("whistle");
+        arrayAdapter.add("horn");
+        arrayAdapter.add("guitar");
+        arrayAdapter.add("chime");
+        arrayAdapter.add("success");
+        arrayAdapter.add("bells");
     }
 
     @Override

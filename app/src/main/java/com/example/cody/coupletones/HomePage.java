@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cody.coupletones.tones.sonaTone;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -51,8 +52,8 @@ public class HomePage extends AppCompatActivity {
         initializeComponents();
 
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        arrival = new Tone("inception",vibrator);
-        departure = new Tone("bells", vibrator);
+        arrival = new sonaTone(vibrator);
+        departure = new sonaTone(vibrator);
 
         firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
         firebase.addValueEventListener(new ValueEventListener() {

@@ -7,7 +7,9 @@ import android.os.Vibrator;
 /**
  * Created by allenF on 6/2/16.
  */
-public class Tone implements Sound {
+public interface Tone {
+    public void play(Context context);
+    /*
     private String name;
     private int vibrationPattern;
     MediaPlayer player;
@@ -101,7 +103,7 @@ public class Tone implements Sound {
     }
 
 
-
+*/
 
 }
 
