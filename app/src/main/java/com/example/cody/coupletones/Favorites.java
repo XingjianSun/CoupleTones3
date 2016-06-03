@@ -131,7 +131,36 @@ public class Favorites extends AppCompatActivity {
                                 builderInner.setTitle("Your Selected Tone is");
 
                                 MediaPlayer player = MediaPlayer.create(Favorites.this, R.raw.default1);
-                                Tone tone = new Tone(toneName, vibrate);
+                                Tones tone = new defaultTone(vibrate);
+                                    switch (name) {
+                                        case "default":
+                                            tone = new defaultTone(vibrate);
+                                            break;
+                                        case "relax":
+                                            tone = new relaxTone(vibrate);
+                                            break;
+                                        case "inception":
+                                            tone = new inceptionTone(vibrate);
+                                            break;
+                                        case "sona":
+                                            tone = new sonaTone(vibrate);
+                                            break;
+                                        case "whistle":
+                                            tone = new whistleTone(vibrate);
+                                            break;
+                                        case "horn":
+                                            tone = new hornTone(vibrate);
+                                            break;
+                                        case "success":
+                                            tone = new successTone(vibrate);
+                                            break;
+                                        case "chime":
+                                            tone = new chimeTone(vibrate);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                               
                                 tone.play(Favorites.this);
 
 
@@ -176,16 +205,14 @@ public class Favorites extends AppCompatActivity {
 
 
     public void initializeAdaptor(ArrayAdapter arrayAdapter){
-        arrayAdapter.add("Default");
-        arrayAdapter.add("Relax");
-        arrayAdapter.add("Inception");
-        arrayAdapter.add("Sona");
-        arrayAdapter.add("Whistle");
-        arrayAdapter.add("Horn");
-        arrayAdapter.add("Guitar");
-        arrayAdapter.add("Chime");
-        arrayAdapter.add("Success");
-        arrayAdapter.add("Bells");
+        arrayAdapter.add("default");
+        arrayAdapter.add("relax");
+        arrayAdapter.add("inception");
+        arrayAdapter.add("sona");
+        arrayAdapter.add("whistle");
+        arrayAdapter.add("horn");
+        arrayAdapter.add("chime");
+        arrayAdapter.add("success");
     }
 
     @Override
