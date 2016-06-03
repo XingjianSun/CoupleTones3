@@ -18,7 +18,7 @@
         android:id="@+id/partner_email"
         android:textColor="#9d4747"
         android:minWidth="200dp"
-        android:hint="Partner Email"
+        android:hint="Who would you like to add as partner?"
         android:gravity="center"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
