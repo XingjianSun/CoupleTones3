@@ -7,6 +7,7 @@ public class User {
     private String email;
     private String fullName;
     private String password;
+    private String partner;
 
     public User() {}
 
@@ -14,6 +15,7 @@ public class User {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
+        this.partner = "";
     }
 
     public String getEmail() {
@@ -26,6 +28,9 @@ public class User {
 
     public String getPassword(){
         return password;
+    }
+    public String getPartner(){
+        return partner;
     }
 }
 

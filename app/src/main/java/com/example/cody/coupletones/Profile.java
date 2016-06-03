@@ -120,12 +120,7 @@ public class Profile extends AppCompatActivity {
     //--------------------------------------------------------------------------------
     private void resetProfile()
     {
-        SharedPreferences preferences = getSharedPreferences("partner_info", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("Partner's phone number", "");
-        //TODO: The 2 Lines Below Cause Runtime Errors that Prevents Proper LogOut
-        //editor.apply();
-        //MainActivity.firebase.setValue("Logged out");
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
