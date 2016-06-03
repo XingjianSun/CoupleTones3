@@ -18,13 +18,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity {
-    String uname = "";
-    String uemail = "";
-    String upassword = "";
+    static String uname = "";
+    static String uemail = "";
+    static String upassword = "";
     static Firebase firebase;
     static final Firebase mainFireBase = firebase = new Firebase("https://urajkuma-110.firebaseio.com/");
     Button login;
