@@ -4,7 +4,9 @@ import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.example.cody.coupletones.LocationChecker;
+import com.example.cody.coupletones.MainActivity;
 import com.example.cody.coupletones.MapsActivity;
+import com.example.cody.coupletones.ToneManager;
 import com.google.android.gms.maps.GoogleMap;
 
 import java.util.HashMap;
@@ -17,6 +19,7 @@ import static junit.framework.Assert.assertEquals;
 public class JUnit_test extends ActivityInstrumentationTestCase2<MapsActivity> {
 
     private GoogleMap mMap;
+    ToneManager toneManager = new ToneManager();
 
     LocationChecker locationChecker = new LocationChecker();
 
@@ -80,11 +83,73 @@ public class JUnit_test extends ActivityInstrumentationTestCase2<MapsActivity> {
         boolean test = locationChecker.checkForVisit(test_location, true);
         assertEquals(false, test);
     }
+
+    /*
     public void test_invalid_phoneNo(){
         MainActivity main = new MainActivity();
         String number = "123456";
         boolean test = main.checkPhoneNumber(number);
         assertEquals(false, test);
     }
+
+*/
+
+    public void test_addTone_success(){
+        toneManager.addTone("location", "tone1");
+        HashMap map = toneManager.getMyTones();
+        assertEquals(true, map.containsKey("location"));
+
+    }
+
+    public void test_addTone_same(){
+        toneManager.addTone("location", "tone1");
+        toneManager.addTone("location", "tone1");
+        HashMap map = toneManager.getMyTones();
+        assertEquals(true, map.containsKey("location"));
+
+    }
+
+    public void test_addTone_fail(){
+
+        HashMap map = toneManager.getMyTones();
+        assertEquals(false, map.containsKey("location_fail"));
+
+    }
+    /*
+    public void test_addTone_random(){
+        toneManager.addTone("location", "tone1");
+        HashMap map = toneManager.getMyTones();
+        assertEquals(true, map.containsKey("location"));
+
+    }
+    */
+
+    public void test_changeTone_success(){
+        toneManager.addTone("location", "tone1");
+        toneManager.changeTone("location", "tone2");
+        HashMap map = toneManager.getMyTones();
+        assertEquals(true, map.containsValue("tone2"));
+    }
+
+    public void test_changeTone_same(){
+        toneManager.addTone("location", "tone1");
+        toneManager.changeTone("location", "tone1");
+        HashMap map = toneManager.getMyTones();
+        assertEquals(true, map.containsValue("tone1"));
+    }
+
+    public void test_changeTone_fail(){
+
+        HashMap map = toneManager.getMyTones();
+        assertEquals(fale, map.containsValue("tone_fail"));
+    }
+    /*
+    public void test_changeTone_random(){
+        toneManager.addTone("location", "tone1");
+        toneManager.changeTone("location", "tone2");
+        HashMap map = toneManager.getMyTones();
+        assertEquals(true, map.containsValue("tone2"));
+    }
+    */
 
 }
