@@ -22,9 +22,9 @@ import com.firebase.client.Firebase;
 
 
 public class MainActivity extends AppCompatActivity {
-    static String uname = "";
-    static String uemail = "";
-    static String upassword = "";
+    String uname = "";
+    String uemail = "";
+    String upassword = "";
     static Firebase firebase;
     static final Firebase mainFireBase = firebase = new Firebase("https://urajkuma-110.firebaseio.com/");
     Button login;
@@ -71,11 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 String Email = email.getText().toString();
                 String Password = password.getText().toString();
 
-                if (checkLogin(Email, Password)) {
-
-                    Intent i = new Intent(MainActivity.this, AddFriend.class);
-                    startActivity(i);
-                } else {
+                if (checkLogin(Email, Password))
+                    addFriend();
+                else {
                     email.clearComposingText();
                     email.clearComposingText();
                     password.clearComposingText();
@@ -169,26 +167,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (name.getText().toString() == "" || email.getText().toString() == null
-                        || password.getText().toString() == null || verify.getText().toString() == null) {
+                        || password.getText().toString() == null || verify.getText().toString() == null)
                     Toast.makeText(getBaseContext(), "Missing Some Required Fields", Toast.LENGTH_LONG).show();
-                } else if (password.getText().toString().equals("")) {
+                else if (password.getText().toString().equals(""))
                     Toast.makeText(getBaseContext(), "Password Cannot be Empty", Toast.LENGTH_LONG).show();
-                } else if (!password.getText().toString().equals(verify.getText().toString())) {
+                else if (!password.getText().toString().equals(verify.getText().toString()))
                     Toast.makeText(getBaseContext(), "Passwords Do Not Match", Toast.LENGTH_LONG).show();
-                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
+                else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches())
                     Toast.makeText(getBaseContext(), "Invalid Email", Toast.LENGTH_LONG).show();
-                } else {
+                else {
                     uname = name.getText().toString();
                     uemail = email.getText().toString();
                     upassword = password.getText().toString();
                     saveLoginData();
                     Toast.makeText(getBaseContext(), "Registration Success", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(MainActivity.this, AddFriend.class);
-                    startActivity(i);
+                    addFriend();
                     toShow.dismiss();
                 }
             }
         });
+    }
+
+    private void addFriend(){
+        Intent i = new Intent(MainActivity.this, AddFriend.class);
+        startActivity(i);
     }
 
     public boolean checkLogin(String Email, String Password) {
