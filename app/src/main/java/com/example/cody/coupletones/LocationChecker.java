@@ -1,5 +1,6 @@
 package com.example.cody.coupletones;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +53,11 @@ public class LocationChecker extends AppCompatActivity{
 
 
         myFavLocs.put(name, currLocation);
+        try {
+            Favorites.myList.add(name);
+        }
+        catch (NullPointerException e) {
+        }
         Log.v("Success", "Successfully added Location");
         return true;
     }

@@ -26,8 +26,10 @@ public class Favorites extends AppCompatActivity {
 
     private ToneManager toneManager;
     private Vibrator vibrate;
-    public static ArrayList<String> listofLocations = new ArrayList<String>();
+    public static ArrayList<String> myList = new ArrayList<String>();
+    public static ArrayList<String> theirList = new ArrayList<String>();
     public static ArrayAdapter<String> arrayAdapter;
+    private ArrayAdapter<String> theirAdapter;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -41,6 +43,7 @@ public class Favorites extends AppCompatActivity {
         setContentView(R.layout.activity_favorites);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if (toolbar != null) getSupportActionBar().setTitle("My Favorites");
         initializeComponents();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         userFavoritesListener();
@@ -55,7 +58,11 @@ public class Favorites extends AppCompatActivity {
         userFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Test User Favorites", Toast.LENGTH_LONG).show();
+                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                setSupportActionBar(toolbar);
+                if (toolbar != null) getSupportActionBar().setTitle("My Favorites");
+                ListView lv = (ListView) findViewById(R.id.visits);
+                lv.setAdapter(arrayAdapter);
             }
         });
     }
@@ -65,7 +72,11 @@ public class Favorites extends AppCompatActivity {
         partnerFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Test Partner Favorites", Toast.LENGTH_LONG).show();
+                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                setSupportActionBar(toolbar);
+                if (toolbar != null) getSupportActionBar().setTitle("Partner Favorites");
+                ListView lv = (ListView) findViewById(R.id.visits);
+                lv.setAdapter(theirAdapter);
             }
         });
     }
@@ -81,7 +92,8 @@ public class Favorites extends AppCompatActivity {
         toneManager = new ToneManager();
         ListView lv = (ListView) findViewById(R.id.visits);
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listofLocations);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myList);
+        theirAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, theirList);
         lv.setAdapter(arrayAdapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -119,10 +131,8 @@ public class Favorites extends AppCompatActivity {
                                 builderInner.setTitle("Your Selected Tone is");
 
                                 MediaPlayer player = MediaPlayer.create(Favorites.this, R.raw.default1);
-                                Tone tone = new Tone (toneName,vibrate);
+                                Tone tone = new Tone(toneName, vibrate);
                                 tone.play(Favorites.this);
-
-
 
 
                                 AlertDialog.Builder builder = builderInner.setPositiveButton(
@@ -159,10 +169,11 @@ public class Favorites extends AppCompatActivity {
                 adb.setPositiveButton("Ok", null);
                 */
 
-                               }
+            }
         });
 
     }
+
 
     public void initializeAdaptor(ArrayAdapter arrayAdapter){
         arrayAdapter.add("Default");
