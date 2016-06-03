@@ -47,9 +47,10 @@ public class LocationChecker extends AppCompatActivity{
             Log.w("Location is Null", "Null Location");
             return false;
         }
-        Firebase firebase = MainActivity.mainFireBase.child("locations").child(name);
-        myLocation newLoc = new myLocation(name);
-        firebase.setValue(newLoc);
+        Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("locations");
+        firebase.push().setValue(new myLocation(name));
+
+
         myFavLocs.put(name, currLocation);
         Log.v("Success", "Successfully added Location");
         return true;

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Button login;
     Button register;
     EditText email, password;
+    static User newUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void saveLoginData() {
         Firebase newUserRef = mainFireBase.child("users").child(uname);
-        User newUser = new User(uname, uemail, upassword);
+        newUser = new User(uname, uemail, upassword);
         newUserRef.setValue(newUser);
     }
 
