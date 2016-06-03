@@ -48,8 +48,8 @@ public class LocationChecker extends AppCompatActivity{
             Log.w("Location is Null", "Null Location");
             return false;
         }
-        Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("locations");
-        firebase.push().setValue(new myLocation(name));
+        //Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("locations");
+        //firebase.push().setValue(new myLocation(name));
 
 
         myFavLocs.put(name, currLocation);
@@ -76,7 +76,7 @@ public class LocationChecker extends AppCompatActivity{
                     currentlyAt = (String) pair.getKey();
                     current = toComp;
                     MainActivity.firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
-                    MainActivity.firebase.setValue("Your partner has visited " + pair.getKey());
+                    MainActivity.firebase.setValue("Your Partner Has Visited " + pair.getKey());
                 }
                 return true;
             }
@@ -91,7 +91,7 @@ public class LocationChecker extends AppCompatActivity{
         float dist = location.distanceTo(current);
         if(dist > check){
             MainActivity.firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
-            MainActivity.firebase.setValue("Your partner has departed " + currentlyAt);
+            MainActivity.firebase.setValue("Your Partner Has Departed " + currentlyAt);
             currentlyAt = "";
             current = null;
             return true;

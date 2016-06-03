@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +36,9 @@ public class HomePage extends AppCompatActivity {
     Firebase firebase;
     static String uemail = "";
     boolean init = true;
+    Vibrator vibrator;
+    Tone arrival;
+    Tone departure;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +49,30 @@ public class HomePage extends AppCompatActivity {
         if (toolbar != null) getSupportActionBar().setTitle("Partner's Visited Locations");
         //if(uemail == "") addFriend();
         initializeComponents();
+
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        arrival = new Tone("inception",vibrator);
+        departure = new Tone("bells", vibrator);
+
         firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
         firebase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if(init){
+                    init = false;
+                    return;
+                }
                 String data = dataSnapshot.getValue(String.class);
-                String toAdd = data.substring(16);
+
+                String toAdd = data.substring(17);
+                String firstLetter = toAdd.substring(0,1);
+                Log.v("letter", firstLetter);
+                if(firstLetter.equals("V")){
+                    arrival.play(HomePage.this);
+                }
+                else{
+                    departure.play(HomePage.this);
+                }
                 listofLocations.add(toAdd);
                 lv.setAdapter(arrayAdapter);
                 Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
