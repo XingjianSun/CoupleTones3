@@ -59,7 +59,7 @@ public class HomePage extends AppCompatActivity {
         arrival = new arrivalTone(vibrator);
         departure = new departureTone(vibrator);
 
-        Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("visits");
+        Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("messages");
         firebase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -84,8 +84,7 @@ public class HomePage extends AppCompatActivity {
                 //toPlay.play(HomePage.this);
                 listofLocations.add(toAdd);
                 lv.setAdapter(arrayAdapter);
-                listofLocations.add(data);
-                Toast.makeText(getBaseContext(), "Your partner has visited " + data, Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
             }
 
             @Override
