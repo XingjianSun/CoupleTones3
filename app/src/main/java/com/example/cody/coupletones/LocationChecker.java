@@ -50,7 +50,7 @@ public class LocationChecker extends AppCompatActivity {
         Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("locations");
         firebase.push().setValue(new myLocation(name));
         Firebase partnerFirebase = MainActivity.mainFireBase.child("users").child(AddFriend.partner).child("partner's locations");
-        partnerFirebase.push().setValue(new myLocation(name));
+        partnerFirebase.push().setValue(name);
         Firebase updatePartnerFavLocations = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("partner's locations");
         updatePartnerFavLocations.addValueEventListener(new ValueEventListener() {
             @Override
