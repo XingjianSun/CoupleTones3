@@ -175,7 +175,7 @@ public class Favorites extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getBaseContext(), location + "removed from user favorites!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getBaseContext(), location + " removed from user favorites!", Toast.LENGTH_LONG).show();
                                 arrayAdapter.remove(location);
                             }
                         })
