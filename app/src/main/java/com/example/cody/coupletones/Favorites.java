@@ -2,6 +2,7 @@ package com.example.cody.coupletones;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 
 public class Favorites extends AppCompatActivity {
 
-    static ToneManager toneManager;
+    private ToneManager toneManager;
     private Vibrator vibrate;
     public static ArrayList<String> myList = new ArrayList<String>();
     public static ArrayList<String> theirList = new ArrayList<String>();
@@ -53,14 +54,14 @@ public class Favorites extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (toolbar != null) getSupportActionBar().setTitle("My Favorites");
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initializeComponents();
+        setUserClicker();
         userFavoritesListener();
         partnerFavoritesListener();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        initializeComponents();
     }
 
     public void userFavoritesListener() {
@@ -71,8 +72,7 @@ public class Favorites extends AppCompatActivity {
                 Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
                 setSupportActionBar(toolbar);
                 if (toolbar != null) getSupportActionBar().setTitle("My Favorites");
-                ListView lv = (ListView) findViewById(R.id.visits);
-                lv.setAdapter(arrayAdapter);
+                setUserClicker();
             }
         });
     }
@@ -85,8 +85,7 @@ public class Favorites extends AppCompatActivity {
                 Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
                 setSupportActionBar(toolbar);
                 if (toolbar != null) getSupportActionBar().setTitle("Partner Favorites");
-                ListView lv = (ListView) findViewById(R.id.visits);
-                lv.setAdapter(theirAdapter);
+                setPartnerClicker();
             }
         });
     }
@@ -100,16 +99,105 @@ public class Favorites extends AppCompatActivity {
 
         vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         toneManager = new ToneManager();
-        ListView lv = (ListView) findViewById(R.id.visits);
+        final ListView lv = (ListView) findViewById(R.id.visits);
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myList);
         theirAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, theirList);
         lv.setAdapter(arrayAdapter);
 
+    }
+
+
+    public void initializeAdaptor(ArrayAdapter arrayAdapter){
+        arrayAdapter.add("Default");
+        arrayAdapter.add("Relax");
+        arrayAdapter.add("Inception");
+        arrayAdapter.add("Sona");
+        arrayAdapter.add("Whistle");
+        arrayAdapter.add("Horn");
+        arrayAdapter.add("Guitar");
+        arrayAdapter.add("Chime");
+        arrayAdapter.add("Success");
+        arrayAdapter.add("Bells");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Favorites Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.example.cody.coupletones/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Favorites Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.example.cody.coupletones/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
+
+    private void setUserClicker()
+    {
+        ListView lv = (ListView) findViewById(R.id.visits);
+        //lv.setEnabled(false);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder a_builder = new AlertDialog.Builder(Favorites.this);
+                final String location = parent.getItemAtPosition(position).toString();
+                a_builder.setMessage("Delete " + location + "?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getBaseContext(), location + "removed from user favorites!", Toast.LENGTH_LONG).show();
+                                arrayAdapter.remove(location);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = a_builder.create();
+                alert.setTitle("Delete Location");
+                alert.show();
+            }
+        });
+        lv.setAdapter(arrayAdapter);
+    }
+
+    private void setPartnerClicker() {
+        ListView lv = (ListView) findViewById(R.id.visits);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
-                Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
                 AlertDialog.Builder builderSingle = new AlertDialog.Builder(Favorites.this);
 
                 builderSingle.setTitle("Select Your Tone and Vibration");
@@ -141,37 +229,35 @@ public class Favorites extends AppCompatActivity {
                                 builderInner.setTitle("Your Selected Tone is");
 
                                 MediaPlayer player = MediaPlayer.create(Favorites.this, R.raw.default1);
-
                                 Tones tone = new defaultTone(vibrate);
-                                    switch (toneName) {
-                                        case "default":
-                                            tone = new defaultTone(vibrate);
-                                            break;
-                                        case "relax":
-                                            tone = new relaxTone(vibrate);
-                                            break;
-                                        case "inception":
-                                            tone = new inceptionTone(vibrate);
-                                            break;
-                                        case "sona":
-                                            tone = new sonaTone(vibrate);
-                                            break;
-                                        case "whistle":
-                                            tone = new whistleTone(vibrate);
-                                            break;
-                                        case "horn":
-                                            tone = new hornTone(vibrate);
-                                            break;
-                                        case "success":
-                                            tone = new successTone(vibrate);
-                                            break;
-                                        case "chime":
-                                            tone = new chimeTone(vibrate);
-                                            break;
-                                        default:
-                                            break;
-                                    }
-
+                                switch (toneName) {
+                                    case "default":
+                                        tone = new defaultTone(vibrate);
+                                        break;
+                                    case "relax":
+                                        tone = new relaxTone(vibrate);
+                                        break;
+                                    case "inception":
+                                        tone = new inceptionTone(vibrate);
+                                        break;
+                                    case "sona":
+                                        tone = new sonaTone(vibrate);
+                                        break;
+                                    case "whistle":
+                                        tone = new whistleTone(vibrate);
+                                        break;
+                                    case "horn":
+                                        tone = new hornTone(vibrate);
+                                        break;
+                                    case "success":
+                                        tone = new successTone(vibrate);
+                                        break;
+                                    case "chime":
+                                        tone = new chimeTone(vibrate);
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 tone.play(Favorites.this);
 
 
@@ -182,8 +268,7 @@ public class Favorites extends AppCompatActivity {
                                             public void onClick(
                                                     DialogInterface dialog,
                                                     int which) {
-                                                Favorites.toneManager.addTone((String) parent.getItemAtPosition(position), toneName);
-                                                //Toast.makeText(getBaseContext(), (String)toneManager.myTones.get("Geisel Library"), Toast.LENGTH_LONG).show();
+                                                toneManager.addTone((String) parent.getItemAtPosition(position), toneName);
                                                 dialog.dismiss();
                                             }
                                         });
@@ -211,61 +296,6 @@ public class Favorites extends AppCompatActivity {
 
             }
         });
-
-    }
-
-
-    public void initializeAdaptor(ArrayAdapter arrayAdapter){
-        arrayAdapter.add("default");
-        arrayAdapter.add("relax");
-        arrayAdapter.add("inception");
-        arrayAdapter.add("sona");
-        arrayAdapter.add("whistle");
-        arrayAdapter.add("horn");
-        arrayAdapter.add("chime");
-        arrayAdapter.add("success");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Favorites Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.cody.coupletones/http/host/path")
-
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-        initializeComponents();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Favorites Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.cody.coupletones/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+        lv.setAdapter(theirAdapter);
     }
 }

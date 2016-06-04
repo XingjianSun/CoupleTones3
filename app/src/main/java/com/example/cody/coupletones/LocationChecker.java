@@ -28,7 +28,7 @@ import java.util.Set;
     * checking valid visit
     *
  */
-public class LocationChecker extends AppCompatActivity{
+public class LocationChecker extends AppCompatActivity {
 
     private static HashMap myFavLocs;
     public static float check = (float) 160.934; //1/10 of a mile in meters
@@ -59,7 +59,12 @@ public class LocationChecker extends AppCompatActivity{
         //SharedPreferences.Editor editor = sharedPreferences.edit();
        // editor.putString(name,"default");
         //editor.apply();
-
+        myFavLocs.put(name, currLocation);
+        try {
+            Favorites.myList.add(name);
+        }
+        catch (NullPointerException e) {
+        }
         Log.v("Success", "Successfully added Location");
         return true;
     }
