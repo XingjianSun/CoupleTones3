@@ -45,16 +45,6 @@ public class AddFriend extends AppCompatActivity {
         Log.v("on start", "came here2");
     }
 
-/*    @Override
-    protected void onStart() {
-        super.onStart();
-        if(finalPartner != "")
-        {
-            Intent i = new Intent(AddFriend.this, HomePage.class);
-            startActivity(i);
-        }
-    }
-*/
     @Override
     public void onBackPressed() {
     }

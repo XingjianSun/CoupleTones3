@@ -53,13 +53,13 @@ public class LocationChecker extends AppCompatActivity{
 
 
         myFavLocs.put(name, currLocation);
-        try {
-            Favorites.myList.add(name);
-            Favorites.toneManager.addTone(name, "default");
-        }
-        catch (NullPointerException e) {
-        }
-        //HomePage.toneManager.addTone(name, "default");
+//        Favorites.myList.add(name);
+  //      Favorites.toneManager.addTone(name, "default");
+        //SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
+        //SharedPreferences.Editor editor = sharedPreferences.edit();
+       // editor.putString(name,"default");
+        //editor.apply();
+
         Log.v("Success", "Successfully added Location");
         return true;
     }
