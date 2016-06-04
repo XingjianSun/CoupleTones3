@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 
 /*
    * File containing user profile information.
@@ -22,7 +24,7 @@ import android.widget.TextView;
    *
  */
 public class Profile extends AppCompatActivity {
-
+    public static HashMap myFavLocs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

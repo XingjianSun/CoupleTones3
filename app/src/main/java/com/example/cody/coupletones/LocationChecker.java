@@ -30,17 +30,16 @@ import java.util.Set;
  */
 public class LocationChecker extends AppCompatActivity {
 
-    private static HashMap myFavLocs;
     public static float check = (float) 160.934; //1/10 of a mile in meters
     String currentlyAt = "";
     Location current = null;
 
     public LocationChecker() {
-        myFavLocs = new HashMap();
+        Profile.myFavLocs = new HashMap();
     }
 
     public boolean addLocation(String name, Location currLocation) {
-        if(name.equals("") || name.equals(null) || myFavLocs.containsKey(name)) {
+        if(name.equals("") || name.equals(null) || Profile.myFavLocs.containsKey(name)) {
             Log.w("error", "No names specified");
             return false;
         }
@@ -50,27 +49,18 @@ public class LocationChecker extends AppCompatActivity {
         }
         Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("locations");
         firebase.push().setValue(new myLocation(name));
+        Firebase partnerFirebase = MainActivity.mainFireBase.child("users").child(AddFriend.partner).child("partner's locations");
+        partnerFirebase.push().setValue(new myLocation(name));
 
 
-        myFavLocs.put(name, currLocation);
-//        Favorites.myList.add(name);
-  //      Favorites.toneManager.addTone(name, "default");
-        //SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
-        //SharedPreferences.Editor editor = sharedPreferences.edit();
-       // editor.putString(name,"default");
-        //editor.apply();
-        myFavLocs.put(name, currLocation);
-        try {
-            Favorites.myList.add(name);
-        }
-        catch (NullPointerException e) {
-        }
+        Profile.myFavLocs.put(name, currLocation);
+        //Favorites.myList.add(name);
         Log.v("Success", "Successfully added Location");
         return true;
     }
     public boolean checkForVisit(Location location, boolean test){
-        Iterator it = myFavLocs.entrySet().iterator();
-        if(myFavLocs.isEmpty()) {
+        Iterator it = Profile.myFavLocs.entrySet().iterator();
+        if(Profile.myFavLocs.isEmpty()) {
             return false;
         }
         while(it.hasNext()) {
@@ -82,6 +72,8 @@ public class LocationChecker extends AppCompatActivity {
                 if (!test) {
                     currentlyAt = (String) pair.getKey();
                     current = toComp;
+                    Firebase partnerFirebase = MainActivity.mainFireBase.child("users").child(AddFriend.partner);
+
                     MainActivity.firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
                     MainActivity.firebase.setValue("Your Partner Has Visited " + pair.getKey());
                 }
@@ -107,6 +99,6 @@ public class LocationChecker extends AppCompatActivity {
     }
 
     public HashMap getMap(){
-        return myFavLocs;
+        return Profile.myFavLocs;
     }
 }

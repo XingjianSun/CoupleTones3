@@ -139,6 +139,9 @@ public class HomePage extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.visits);
         listofLocations = new ArrayList<String>();
 
+        listofLocations.add("Geisel Library");
+        listofLocations.add("Price Center");
+
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listofLocations);
         lv.setAdapter(arrayAdapter);
 
