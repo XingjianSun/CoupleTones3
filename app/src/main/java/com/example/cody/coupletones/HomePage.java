@@ -39,7 +39,6 @@ public class HomePage extends AppCompatActivity {
     ListView lv;
     ArrayList<String> listofLocations;
     ArrayAdapter<String> arrayAdapter;
-    Firebase firebase;
     static String uemail = "";
     boolean init = true;
     Vibrator vibrator;
@@ -60,7 +59,7 @@ public class HomePage extends AppCompatActivity {
         arrival = new arrivalTone(vibrator);
         departure = new departureTone(vibrator);
 
-        firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
+        Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("visits");
         firebase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -85,7 +84,8 @@ public class HomePage extends AppCompatActivity {
                 //toPlay.play(HomePage.this);
                 listofLocations.add(toAdd);
                 lv.setAdapter(arrayAdapter);
-                Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
+                listofLocations.add(data);
+                Toast.makeText(getBaseContext(), "Your partner has visited " + data, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -138,9 +138,6 @@ public class HomePage extends AppCompatActivity {
     private void initializeComponents() {
         lv = (ListView) findViewById(R.id.visits);
         listofLocations = new ArrayList<String>();
-
-        listofLocations.add("Geisel Library");
-        listofLocations.add("Price Center");
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listofLocations);
         lv.setAdapter(arrayAdapter);

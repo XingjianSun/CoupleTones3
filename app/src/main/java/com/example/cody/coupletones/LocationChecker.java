@@ -54,7 +54,7 @@ public class LocationChecker extends AppCompatActivity {
 
 
         Profile.myFavLocs.put(name, currLocation);
-        //Favorites.myList.add(name);
+        Favorites.myList.add(name);
         Log.v("Success", "Successfully added Location");
         return true;
     }
@@ -72,10 +72,10 @@ public class LocationChecker extends AppCompatActivity {
                 if (!test) {
                     currentlyAt = (String) pair.getKey();
                     current = toComp;
-                    Firebase partnerFirebase = MainActivity.mainFireBase.child("users").child(AddFriend.partner);
-
-                    MainActivity.firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
-                    MainActivity.firebase.setValue("Your Partner Has Visited " + pair.getKey());
+                    Firebase partnerFirebase = MainActivity.mainFireBase.child("users").child(AddFriend.partner).child("visits");
+                    partnerFirebase.setValue(pair.getKey());
+                    //MainActivity.firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
+                    //MainActivity.firebase.setValue("Your Partner Has Visited " + pair.getKey());
                 }
                 return true;
             }
@@ -89,8 +89,8 @@ public class LocationChecker extends AppCompatActivity {
         }
         float dist = location.distanceTo(current);
         if(dist > check){
-            MainActivity.firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
-            MainActivity.firebase.setValue("Your Partner Has Departed " + currentlyAt);
+            Firebase partnerFirebase = MainActivity.mainFireBase.child("users").child(AddFriend.partner).child("visits");
+            partnerFirebase.setValue(currentlyAt);
             currentlyAt = "";
             current = null;
             return true;
