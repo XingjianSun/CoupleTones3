@@ -1,8 +1,20 @@
 package com.example.cody.coupletones;
 
 import android.content.SharedPreferences;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.example.cody.coupletones.tones.Tones;
+import com.example.cody.coupletones.tones.chimeTone;
+import com.example.cody.coupletones.tones.defaultTone;
+import com.example.cody.coupletones.tones.hornTone;
+import com.example.cody.coupletones.tones.inceptionTone;
+import com.example.cody.coupletones.tones.relaxTone;
+import com.example.cody.coupletones.tones.sonaTone;
+import com.example.cody.coupletones.tones.successTone;
+import com.example.cody.coupletones.tones.whistleTone;
 
 import java.util.HashMap;
 
@@ -19,10 +31,41 @@ public class ToneManager extends AppCompatActivity {
 
     public void addTone(String location, String tone){
         myTones.put(location,tone);
-        SharedPreferences  sharedPreferences = getSharedPreferences("User info", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(location,tone);
-        editor.apply();
+    }
+
+    public Tones getTone(String location, Vibrator vibrate){
+        String toneName = (String) myTones.get(location);
+        Log.v("Success", toneName);
+        Tones tone = new defaultTone(vibrate);
+        switch (toneName) {
+            case "default":
+                tone = new defaultTone(vibrate);
+                break;
+            case "relax":
+                tone = new relaxTone(vibrate);
+                break;
+            case "inception":
+                tone = new inceptionTone(vibrate);
+                break;
+            case "sona":
+                tone = new sonaTone(vibrate);
+                break;
+            case "whistle":
+                tone = new whistleTone(vibrate);
+                break;
+            case "horn":
+                tone = new hornTone(vibrate);
+                break;
+            case "success":
+                tone = new successTone(vibrate);
+                break;
+            case "chime":
+                tone = new chimeTone(vibrate);
+                break;
+            default:
+                break;
+        }
+        return tone;
     }
 
     public void changeTone(String location, String tone) {

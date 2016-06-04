@@ -110,6 +110,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+
+    }
+
+    @Override
     public void onConnected(@Nullable Bundle bundle) {}
     @Override
     public void onConnectionSuspended(int i) {}

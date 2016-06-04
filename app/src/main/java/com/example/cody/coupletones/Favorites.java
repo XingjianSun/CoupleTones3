@@ -16,7 +16,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cody.coupletones.tones.Tones;
+import com.example.cody.coupletones.tones.chimeTone;
+import com.example.cody.coupletones.tones.defaultTone;
+import com.example.cody.coupletones.tones.hornTone;
+import com.example.cody.coupletones.tones.inceptionTone;
+import com.example.cody.coupletones.tones.relaxTone;
 import com.example.cody.coupletones.tones.sonaTone;
+import com.example.cody.coupletones.tones.successTone;
+import com.example.cody.coupletones.tones.whistleTone;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,7 +33,7 @@ import java.util.ArrayList;
 
 public class Favorites extends AppCompatActivity {
 
-    private ToneManager toneManager;
+    static ToneManager toneManager;
     private Vibrator vibrate;
     public static ArrayList<String> myList = new ArrayList<String>();
     public static ArrayList<String> theirList = new ArrayList<String>();
@@ -45,13 +53,14 @@ public class Favorites extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (toolbar != null) getSupportActionBar().setTitle("My Favorites");
-        initializeComponents();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         userFavoritesListener();
         partnerFavoritesListener();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        initializeComponents();
     }
 
     public void userFavoritesListener() {
@@ -132,7 +141,37 @@ public class Favorites extends AppCompatActivity {
                                 builderInner.setTitle("Your Selected Tone is");
 
                                 MediaPlayer player = MediaPlayer.create(Favorites.this, R.raw.default1);
-                                Tone tone = new sonaTone(vibrate);
+
+                                Tones tone = new defaultTone(vibrate);
+                                    switch (toneName) {
+                                        case "default":
+                                            tone = new defaultTone(vibrate);
+                                            break;
+                                        case "relax":
+                                            tone = new relaxTone(vibrate);
+                                            break;
+                                        case "inception":
+                                            tone = new inceptionTone(vibrate);
+                                            break;
+                                        case "sona":
+                                            tone = new sonaTone(vibrate);
+                                            break;
+                                        case "whistle":
+                                            tone = new whistleTone(vibrate);
+                                            break;
+                                        case "horn":
+                                            tone = new hornTone(vibrate);
+                                            break;
+                                        case "success":
+                                            tone = new successTone(vibrate);
+                                            break;
+                                        case "chime":
+                                            tone = new chimeTone(vibrate);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
                                 tone.play(Favorites.this);
 
 
@@ -143,7 +182,7 @@ public class Favorites extends AppCompatActivity {
                                             public void onClick(
                                                     DialogInterface dialog,
                                                     int which) {
-                                                toneManager.addTone((String) parent.getItemAtPosition(position), toneName);
+                                                Favorites.toneManager.addTone((String) parent.getItemAtPosition(position), toneName);
                                                 //Toast.makeText(getBaseContext(), (String)toneManager.myTones.get("Geisel Library"), Toast.LENGTH_LONG).show();
                                                 dialog.dismiss();
                                             }
@@ -183,10 +222,8 @@ public class Favorites extends AppCompatActivity {
         arrayAdapter.add("sona");
         arrayAdapter.add("whistle");
         arrayAdapter.add("horn");
-        arrayAdapter.add("guitar");
         arrayAdapter.add("chime");
         arrayAdapter.add("success");
-        arrayAdapter.add("bells");
     }
 
     @Override
@@ -197,6 +234,7 @@ public class Favorites extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         Action viewAction = Action.newAction(
+
                 Action.TYPE_VIEW, // TODO: choose an action type.
                 "Favorites Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
@@ -205,8 +243,10 @@ public class Favorites extends AppCompatActivity {
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.example.cody.coupletones/http/host/path")
+
         );
         AppIndex.AppIndexApi.start(client, viewAction);
+        initializeComponents();
     }
 
     @Override

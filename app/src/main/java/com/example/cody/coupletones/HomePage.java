@@ -21,6 +21,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cody.coupletones.tones.Tones;
+import com.example.cody.coupletones.tones.arrivalTone;
+import com.example.cody.coupletones.tones.defaultTone;
+import com.example.cody.coupletones.tones.departureTone;
+import com.example.cody.coupletones.tones.relaxTone;
 import com.example.cody.coupletones.tones.sonaTone;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -38,8 +43,8 @@ public class HomePage extends AppCompatActivity {
     static String uemail = "";
     boolean init = true;
     Vibrator vibrator;
-    Tone arrival;
-    Tone departure;
+    Tones arrival;
+    Tones departure;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +57,8 @@ public class HomePage extends AppCompatActivity {
         initializeComponents();
 
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        arrival = new sonaTone(vibrator);
-        departure = new sonaTone(vibrator);
+        arrival = new arrivalTone(vibrator);
+        departure = new departureTone(vibrator);
 
         firebase = new Firebase("https://urajkuma-110.firebaseio.com/ProjectDemo");
         firebase.addValueEventListener(new ValueEventListener() {
@@ -70,10 +75,14 @@ public class HomePage extends AppCompatActivity {
                 Log.v("letter", firstLetter);
                 if(firstLetter.equals("V")){
                     arrival.play(HomePage.this);
+                    firstLetter = toAdd.substring(7);
                 }
                 else{
                     departure.play(HomePage.this);
+                    firstLetter = toAdd.substring(8);
                 }
+                //Tones toPlay = Favorites.toneManager.getTone(firstLetter, vibrator);
+                //toPlay.play(HomePage.this);
                 listofLocations.add(toAdd);
                 lv.setAdapter(arrayAdapter);
                 Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
@@ -83,6 +92,7 @@ public class HomePage extends AppCompatActivity {
             public void onCancelled(FirebaseError firebaseError) {}
         });
     }
+
 
     @Override
     public void onBackPressed() {

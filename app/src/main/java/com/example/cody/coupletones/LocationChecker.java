@@ -48,16 +48,18 @@ public class LocationChecker extends AppCompatActivity{
             Log.w("Location is Null", "Null Location");
             return false;
         }
-        //Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("locations");
-        //firebase.push().setValue(new myLocation(name));
+        Firebase firebase = MainActivity.mainFireBase.child("users").child(MainActivity.uname).child("locations");
+        firebase.push().setValue(new myLocation(name));
 
 
         myFavLocs.put(name, currLocation);
         try {
             Favorites.myList.add(name);
+            Favorites.toneManager.addTone(name, "default");
         }
         catch (NullPointerException e) {
         }
+        //HomePage.toneManager.addTone(name, "default");
         Log.v("Success", "Successfully added Location");
         return true;
     }

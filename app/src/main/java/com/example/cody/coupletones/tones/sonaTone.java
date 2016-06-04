@@ -10,20 +10,26 @@ import com.example.cody.coupletones.Tone;
 /**
  * Created by Omnit on 6/3/2016.
  */
-public class sonaTone implements Tone{
+
+
+/**
+ * Created by allenF on 6/3/16.
+ */
+public class sonaTone implements Tones {
+
     MediaPlayer player;
-    Vibrator vibrator;
-    long[] vibrationPatterns;
+    Vibrator vibrate;
+    long[]vibrationPattern;
 
     public sonaTone(Vibrator vibrator){
-        vibrationPatterns = new long[] {0, 100, 400, 100};
-        this.vibrator = vibrator;
+        vibrationPattern = new long[]{ 0, 100, 400, 100 };
+        vibrate = vibrator;
     }
-
     @Override
     public void play(Context context) {
+
         player = MediaPlayer.create(context, R.raw.sona);
         player.start();
-        vibrator.vibrate(vibrationPatterns, -1);
+        vibrate.vibrate(vibrationPattern,-1);
     }
 }

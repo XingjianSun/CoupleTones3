@@ -26,7 +26,7 @@
         jar="C:\Users\Omnit\Desktop\ANDROID STUDIO PROJECTS\COUPLETONES1.3\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="231f86cbfccae0373d6037d28019164eb6623b5b">
+        sha1="8b068f54fe6a6f9ea2f4561bfe0c2b6d8c0b4c24">
         <dex dex="C:\Users\Omnit\Desktop\ANDROID STUDIO PROJECTS\COUPLETONES1.3\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_2b61c70ca23333727580109496078bbe9c64f1a4\classes.dex" />
     </item>
     <item
@@ -215,7 +215,7 @@
         jar="C:\Users\Omnit\Desktop\ANDROID STUDIO PROJECTS\COUPLETONES1.3\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="173c912a76eece82eaaec8d4df41adfa9f31186a">
+        sha1="d554868f58e3c5cba8bc781460a7b110237aef1b">
         <dex dex="C:\Users\Omnit\Desktop\ANDROID STUDIO PROJECTS\COUPLETONES1.3\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_14896a250cca103ec44401be1ba4bc3f2458e88b\classes.dex" />
     </item>
     <item
